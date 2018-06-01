@@ -1,0 +1,39 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended", "plugin:react/recommended", "airbnb"],
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "parser": "babel-eslint",
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "comma-dangle": ["error", "never"],
+        "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
+        "arrow-parens": [0, "as-needed", { "requireForBlockBody": true }],
+        "react/no-did-mount-set-state":"warn",
+        "no-case-declarations": "off",
+        "jsx-a11y/anchor-is-valid": "off",
+        "import/no-named-as-default":"off",
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowTernary": true,
+                "allowTemplateTags": [
+                    "injectGlobal"
+                ]
+            }
+        ]
+    }
+}
