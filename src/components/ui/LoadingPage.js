@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Background from './Background';
+
+
 const Loader = styled.div`
   align-items: center;
   background: transparent;
@@ -16,9 +19,11 @@ const LoaderImg = styled.img`
 `;
 
 const LoadingPage = () => (
-  <Loader className="loader">
-    <LoaderImg src="images/loader.gif" alt="Loading" />
-  </Loader>
+  <Background>
+    <Loader>
+      <LoaderImg src="/images/loader.gif" alt="Loading" />
+    </Loader>
+  </Background>
 );
 
 export default LoadingPage;

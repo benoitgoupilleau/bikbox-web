@@ -13,7 +13,8 @@ export default {
   fonts: {
     large: '1.8rem',
     medium: '1.6rem',
-    small: '1.4rem'
+    small: '1.4rem',
+    tiny: '1.2rem'
   },
   spacing: {
     s: '1.2rem',

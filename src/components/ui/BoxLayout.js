@@ -9,12 +9,11 @@ const Wrapper = styled.div`
   opacity: 0.95;
   padding: ${theme.spacing.l} ${theme.spacing.m};
   text-align: center;
-  width: 25rem;
 `;
 
-const BoxLayout = (props) => (
-  <Wrapper>
-    {props.children}
+const BoxLayout = ({ width = '25rem', children}) => (
+  <Wrapper style={{width}}>
+    {children}
   </Wrapper>
 )
 

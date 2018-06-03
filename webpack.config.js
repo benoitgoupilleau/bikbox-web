@@ -25,7 +25,13 @@ module.exports = (env) => {
         test: /\.js$/,
         exclude: /node_modules/
       }]
-    },
+    }, 
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env.API_URL': JSON.stringify(process.env.API_URL),
+        'process.env.X_KEY': JSON.stringify(process.env.X_KEY)
+      })
+    ],
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
