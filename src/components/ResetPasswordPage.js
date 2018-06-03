@@ -76,8 +76,20 @@ export class ResetPasswordPage extends React.Component {
     }
     this.setState({ loading: true })
     this.props.updatePassword(this.props.match.params.token, this.state.password1)
-      .then(() => this.setState({ loading: false, passwordUpdated: true }))
-      .catch(() => this.setState({ loading: false, passwordUpdated: false, error: true, errorMessage: 'Impossible de mettre à jour votre mot de passe. Veuillez ressayer dans quelques instants.' }));
+      .then(() => this.setState({
+        loading: false,
+        passwordUpdated: true,
+        password1: '',
+        password2: ''
+      }))
+      .catch(() => this.setState({
+        loading: false,
+        passwordUpdated: false,
+        password1: '',
+        password2: '',
+        error: true,
+        errorMessage: 'Impossible de mettre à jour votre mot de passe. Veuillez ressayer dans quelques instants.'
+      }));
   }
 
   render() {
