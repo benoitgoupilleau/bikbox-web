@@ -3,27 +3,10 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { startLogin } from '../actions/auth';
 
+import Background from './ui/Background';
+import BoxLayout from './ui/BoxLayout';
+
 import theme from '../styles/theme';
-
-const Wrapper = styled.div`
-  align-items: center;
-  background-size: cover;
-  background: url('https://static.wixstatic.com/media/3aaac2_0de65d1fe7e9478680611613951d5bb2~mv2_d_1920_1345_s_2.jpg/v1/fill/w_1920,h_1148,al_t,q_90/3aaac2_0de65d1fe7e9478680611613951d5bb2~mv2_d_1920_1345_s_2.webp') no-repeat center;
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  width: 100vw;
-  -webkit-background-size: cover;
-`;
-
-const BoxLayout = styled.div`
-  background: ${theme.colors.brandPrimary};
-  border-radius: 3px;
-  opacity: 0.85;
-  padding: ${theme.spacing.l} ${theme.spacing.m};
-  text-align: center;
-  width: 25rem;
-`;
 
 const BoxTitle = styled.h1`
   line-height: 1;
@@ -45,7 +28,7 @@ const LogingButton = styled.button`
 `;
 
 export const LoginPage = ({ startLogin }) => (
-  <Wrapper >
+  <Background >
     <BoxLayout>
       <BoxTitle>
         <img 
@@ -57,7 +40,7 @@ export const LoginPage = ({ startLogin }) => (
       <p>Console d'administration</p>
       <LogingButton onClick={startLogin}>Se Connecter</LogingButton>
     </BoxLayout>
-  </Wrapper>
+  </Background>
 );
 
 export default connect(undefined, { startLogin })(LoginPage);

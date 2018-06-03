@@ -7,7 +7,7 @@ import DashboardPage from '../components/DashboardPage';
 import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
-import LoadingPage from '../components/LoadingPage'
+import ResetPasswordPage from '../components/ResetPasswordPage';
 
 import theme from '../styles/theme';
 
@@ -46,7 +46,7 @@ const AppRouter = () => (
       <Switch>
         <PublicRoute path="/" component={LoginPage} exact />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
-        <Route path="/loading" component={LoadingPage} />
+        <PublicRoute path="/resetpassword/:token" component={ResetPasswordPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
