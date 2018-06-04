@@ -17,9 +17,9 @@ const Wrapper = styled.button`
   text-decoration: none;
 `;
 
-const Button = (props) => (
-  <Wrapper>
-    {props.children}
+const Button = ({ children, ...rest }) => (
+  <Wrapper {...rest}>
+    {children}
   </Wrapper>
 )
 

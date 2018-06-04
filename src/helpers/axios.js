@@ -5,7 +5,6 @@ const instance = axios.create({
   timeout: 1000,
   headers: {
     ['x-key']: process.env.X_KEY,
-    ['Access-Control-Allow-Origin']: window.location.origin,
     ['Content-Type']: 'application/json'
   }
 });
