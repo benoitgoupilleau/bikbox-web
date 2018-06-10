@@ -1,10 +1,12 @@
 import {
   UPDATE_PASSWORD,
-  UPDATE_PASSWORD_FAIL
+  UPDATE_PASSWORD_FAIL,
+  TOGGLE_NAV
 } from '../actions/types';
 
 const defaultUserState = {
-  passwordUpdated: false
+  passwordUpdated: false,
+  isNavOpen: false
 }
 
 export default (state = defaultUserState, action) => {
@@ -18,6 +20,11 @@ export default (state = defaultUserState, action) => {
       return {
         ...state,
         passwordUpdated: false,
+      }
+    case TOGGLE_NAV:
+      return {
+        ...state,
+        isNavOpen: !state.isNavOpen
       }
     default:
       return state;

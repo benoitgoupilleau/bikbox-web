@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { startLogout } from '../actions/auth';
+import { toggleNavBar } from '../actions/user';
 
 import ContentContainer from './ui/ContentContainer';
 
@@ -24,6 +25,9 @@ const HeaderTitle =  styled(Link)`
   text-decoration: none;
   h1 {
     margin: 0;
+    img {
+      min-width: 143px;
+    }
   }
 `;
 
@@ -40,23 +44,52 @@ const LinkButton = styled.button`
   text-decoration: none;
 `;
 
-export const Header = ({ startLogout }) => (
+const NavToggle = styled.div`
+  cursor: pointer;
+  img {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  @media(min-width: 50rem){
+    display: none;
+  };
+`;
+
+const LeftContent = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const Header = ({ startLogout, isNavOpen, toggleNavBar }) => {
+  const navImageSrc = isNavOpen ? '/images/x.svg' : '/images/bars.svg';
+  return (
   <StyledHeader>
     <ContentContainer >
       <HeaderContent >
-        <HeaderTitle to="/dashboard">
-          <h1>
-            <img
-              src="https://static.wixstatic.com/media/078127_6d46d897f14149ab9de07f4a1b1295c7~mv2.png/v1/crop/x_62,y_139,w_988,h_366/fill/w_480,h_164,al_c,usm_0.66_1.00_0.01/078127_6d46d897f14149ab9de07f4a1b1295c7~mv2.png"
-              alt="Bik'box"
-              width="50%"
-            />
-          </h1>
-        </HeaderTitle>
+        <LeftContent>
+          <NavToggle>
+            <img src={navImageSrc} onClick={toggleNavBar} />
+          </NavToggle>
+          <HeaderTitle to="/dashboard">
+            <h1>
+              <img
+                src="https://static.wixstatic.com/media/078127_6d46d897f14149ab9de07f4a1b1295c7~mv2.png/v1/crop/x_62,y_139,w_988,h_366/fill/w_480,h_164,al_c,usm_0.66_1.00_0.01/078127_6d46d897f14149ab9de07f4a1b1295c7~mv2.png"
+                alt="Bik'box"
+                width="50%"
+              />
+            </h1>
+          </HeaderTitle>
+        </LeftContent>
         <LinkButton onClick={startLogout}>Déconnexion</LinkButton>
       </HeaderContent>
     </ContentContainer>
   </StyledHeader>
-);
+  );
+}
 
-export default connect(undefined, { startLogout })(Header);
+const mapStateToProps = state => ({
+  isNavOpen: state.user.isNavOpen
+})
+
+export default connect(mapStateToProps, { startLogout, toggleNavBar })(Header);

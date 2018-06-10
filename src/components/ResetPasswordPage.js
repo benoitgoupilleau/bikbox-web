@@ -52,10 +52,6 @@ export class ResetPasswordPage extends React.Component {
     }
   }
 
-  // componentWillUnmount() {
-  //   console.log('Unmounting')
-  // }
-
   onChangeNewPwd = (e) => {
     e.preventDefault();
     this.setState({ password1: e.target.value, error: false})
@@ -93,7 +89,6 @@ export class ResetPasswordPage extends React.Component {
   }
 
   render() {
-    // console.log(process.env, { API_URL: process.env.API_URL, X_KEY: process.env.X_KEY})
     if (this.state.loading)
       return <LoadingPage />;
     return (
