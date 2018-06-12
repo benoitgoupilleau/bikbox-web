@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node server/server.js",
-    "startdev": "yarn run build:dev && node server/server.js",
+    "dev": "yarn run build:dev && node server/server.js",
     "build:dev": "webpack --mode=development --devtool=inline-source-map",
     "build:prod": "webpack -p --env production --mode=production --devtool=source-map",
     "dev-server": "webpack-dev-server --mode=development --devtool=inline-source-maps",
