@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -18,12 +18,17 @@ module.exports = (env) => {
       'process.env.X_KEY': JSON.stringify(process.env.X_KEY)
     })
   ];
-  if (isProduction) plugins.push(new webpack.optimize.UglifyJsPlugin());
+  if (isProduction) plugins.push(new UglifyJSPlugin({ sourceMap: true }));
   return {
     entry: ['babel-polyfill', './src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+        }
     },
     module: {
       rules: [{
