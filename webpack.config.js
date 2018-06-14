@@ -12,7 +12,13 @@ if (process.env.NODE_ENV === 'test') {
 
 module.exports = (env) => {
   const isProduction = env === 'production';
-
+  const plugins = [
+    new webpack.DefinePlugin({
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+      'process.env.X_KEY': JSON.stringify(process.env.X_KEY)
+    })
+  ];
+  if (isProduction) plugins.push(new webpack.optimize.UglifyJsPlugin());
   return {
     entry: ['babel-polyfill', './src/app.js'],
     output: {
@@ -26,12 +32,7 @@ module.exports = (env) => {
         exclude: /node_modules/
       }]
     }, 
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env.API_URL': JSON.stringify(process.env.API_URL),
-        'process.env.X_KEY': JSON.stringify(process.env.X_KEY)
-      })
-    ],
+    plugins: plugins,
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
