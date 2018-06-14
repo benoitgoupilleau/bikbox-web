@@ -5,6 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Bik'Box | Console</title>
         <link rel="icon" type="image/png" href="https://static.wixstatic.com/media/078127_69d27eaf48724d79acf9c702d5b88d56%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/078127_69d27eaf48724d79acf9c702d5b88d56%7Emv2.png" />
+        <script src=https://cdn.ravenjs.com/3.24.0/raven.min.js crossorigin=anonymous></script>
+        <script>
+            Raven.config('https://d4ce31a3ad734379acaefec27c6b65a2@sentry.io/1226630', {
+                release: '0-0-0',
+                environment: 'development-test',
+            }).install()
+        </script>
         <meta name="copyright" content="© Bik'Box 2018">
     </head>
     <body>
