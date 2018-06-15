@@ -18,14 +18,8 @@ module.exports = (env) => {
       'process.env.X_KEY': JSON.stringify(process.env.X_KEY)
     })
   ];
-  let optimization = {} 
   if (isProduction) {
     plugins.push(new UglifyJSPlugin({ sourceMap: true }));
-    optimization = {
-      splitChunks: {
-        chunks: 'all'
-      }
-    }
   }
   return {
     entry: ['babel-polyfill', './src/app.js'],
@@ -33,7 +27,6 @@ module.exports = (env) => {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
     },
-    optimization: optimization,
     module: {
       rules: [{
         loader: 'babel-loader',
