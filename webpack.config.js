@@ -18,18 +18,22 @@ module.exports = (env) => {
       'process.env.X_KEY': JSON.stringify(process.env.X_KEY)
     })
   ];
-  if (isProduction) plugins.push(new UglifyJSPlugin({ sourceMap: true }));
+  let optimization = {} 
+  if (isProduction) {
+    plugins.push(new UglifyJSPlugin({ sourceMap: true }));
+    optimization = {
+      splitChunks: {
+        chunks: 'all'
+      }
+    }
+  }
   return {
     entry: ['babel-polyfill', './src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
     },
-    optimization: {
-      splitChunks: {
-        chunks: 'all'
-        }
-    },
+    optimization: optimization,
     module: {
       rules: [{
         loader: 'babel-loader',

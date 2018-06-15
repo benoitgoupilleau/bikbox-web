@@ -1,16 +1,31 @@
 import {
   LOGIN,
+  LOGIN_FAIL,
   LOGOUT
 } from '../actions/types';
 
-export default (state = {}, action) => {
+const defaultState = {
+  authToken: '',
+  user: {},
+  errorLogin: false
+}
+
+export default (state = defaultState, action) => {
   switch (action.type) {
     case LOGIN:
       return {
-        uid: action.uid
+        ...state,
+        authToken: action.authToken,
+        user: action.user,
+        errorLogin: false
       };
+    case LOGIN_FAIL:
+      return {
+        ...state,
+        errorLogin: true
+      }
     case LOGOUT:
-      return {};
+      return defaultState;
     default:
       return state;
   }

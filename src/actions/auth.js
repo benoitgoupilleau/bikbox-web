@@ -1,15 +1,23 @@
-
+import axios from '../helpers/axios';
 import {
   LOGIN,
+  LOGIN_FAIL,
   LOGOUT
 } from './types';
 
-export const login = (uid) => ({
+export const login = (authToken, user) => ({
   type: LOGIN,
-  uid
+  authToken,
+  user
 });
 
-export const startLogin = () => dispatch => dispatch(login('123zvss'));
+export const errorLogin = () => ({
+  type: LOGIN_FAIL
+});
+
+export const startLogin = (email, password) => dispatch => axios.post('/adminusers/login', { email, password })
+  .then((res) => dispatch(login(res.headers['x-auth'], res.data)))
+  .catch(() => dispatch(errorLogin()))
 
 export const logout = () => ({
   type: LOGOUT
