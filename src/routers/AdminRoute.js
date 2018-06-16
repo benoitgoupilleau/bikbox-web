@@ -5,13 +5,15 @@ import Header from '../components/ui/Header';
 
 export const PrivateRoute = ({
   isAuthenticated,
+  isAdmin,
+  toggleNavBar,
   component: Component,
   ...rest
 }) => (
   <Route
     {...rest}
     component={(props) => (
-      isAuthenticated ? (
+      (isAuthenticated && isAdmin) ? (
         <div>
           <Header />
           <Component {...props} />
@@ -22,7 +24,8 @@ export const PrivateRoute = ({
 );
 
 const maptStateToProps = (state) => ({
-  isAuthenticated: !!state.auth.authToken
+  isAuthenticated: !!state.auth.authToken,
+  isAdmin: state.auth.user.userType === 'admin'
 });
 
 export default connect(maptStateToProps)(PrivateRoute);

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import ContentContainer from './ContentContainer';
 import NavBar from './NavBar';
@@ -12,13 +13,17 @@ const MainWrapper =  styled.div`
   display: flex;
 `;
 
-const Main = ({ pathName, children }) => (
+const Main = ({ isAdmin, pathName, children }) => (
   <MainWrapper>
-    <NavBar pathName={pathName}/>
+    {isAdmin ? <NavBar pathName={pathName}/> : undefined}
     <ContentContainer>
       {children}
     </ContentContainer>
   </MainWrapper>
 );
 
-export default Main;
+const mapStateToProps = state => ({
+  isAdmin: true //state.auth.user.userType === 'admin'
+})
+
+export default connect(mapStateToProps)(Main);

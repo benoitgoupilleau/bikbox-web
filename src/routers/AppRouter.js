@@ -8,6 +8,7 @@ import AdminPage from '../components/AdminPage';
 import AlertPage from '../components/AlertPage';
 import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
+import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
 import ResetPasswordPage from '../components/ResetPasswordPage';
 
@@ -48,8 +49,8 @@ const AppRouter = () => (
       <Switch>
         <PublicRoute path="/" component={LoginPage} exact />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
-        <PrivateRoute path="/admin" component={AdminPage} />
-        <PrivateRoute path="/alerts" component={AlertPage} />
+        <AdminRoute path="/admin" component={AdminPage} />
+        <AdminRoute path="/alerts" component={AlertPage} />
         <PublicRoute path="/resetpassword/:token" component={ResetPasswordPage} />
         <Route component={NotFoundPage} />
       </Switch>
