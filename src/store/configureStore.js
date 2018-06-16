@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import authReducer from '../reducers/auth';
 import userReducer from '../reducers/user';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = process.env.NODE_ENV === 'production' ? compose : (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
 
 export default () => {
   // Store

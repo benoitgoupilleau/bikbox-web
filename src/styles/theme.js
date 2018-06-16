@@ -3,6 +3,7 @@ export default {
   colors: {
     brandPrimary: '#003d5c',
     brandSecondary: '#E3DE00',
+    brandTertiary: '#CAD2C5',
     defaultColor: '#fff',
     darkGrey: '#333',
     grey: '#666',

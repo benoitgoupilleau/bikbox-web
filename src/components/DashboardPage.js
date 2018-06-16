@@ -17,8 +17,8 @@ const Dashboard = styled.div`
 
 const PageHeader =  styled.div`
   background: ${theme.colors.offWhite};
+  display: flex;
   margin-bottom: ${theme.spacing.l};
-  padding: ${theme.spacing.l} 0;
 `;
 
 const PageHeaderTitle = styled.h1`

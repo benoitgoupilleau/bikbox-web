@@ -5,7 +5,7 @@ import theme from '../styles/theme';
 
 const Wrapper = styled.div`
   color: ${theme.colors.brandPrimary};
-  
+  background: ${theme.colors.brandTertiary};
 `;
 
 

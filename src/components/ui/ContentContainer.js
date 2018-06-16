@@ -6,7 +6,7 @@ import theme from '../../styles/theme';
 const Wrapper = styled.div`
   margin: 0 auto;
   max-width: 80rem;
-  padding: 0 ${theme.spacing.m};
+  padding: ${theme.spacing.l} ${theme.spacing.m};
 `;
 
 const ContentContainer = (props) => (

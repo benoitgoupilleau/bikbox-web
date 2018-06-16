@@ -5,18 +5,18 @@ import styled from 'styled-components';
 import { startLogout } from '../actions/auth';
 import { toggleNavBar } from '../actions/user';
 
-import ContentContainer from './ui/ContentContainer';
-
 import theme from '../styles/theme';
 
 const StyledHeader = styled.header`
   background: ${theme.colors.brandPrimary};
+  padding: 0 ${theme.spacing.m};
 `;
 
 const HeaderContent = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
+  max-width: 80rem;
   padding: ${theme.spacing.s} 0 0 0;
 `;
 
@@ -65,7 +65,6 @@ export const Header = ({ startLogout, isNavOpen, toggleNavBar }) => {
   const navImageSrc = isNavOpen ? '/images/x.svg' : '/images/bars.svg';
   return (
   <StyledHeader>
-    <ContentContainer >
       <HeaderContent >
         <LeftContent>
           <NavToggle>
@@ -83,7 +82,6 @@ export const Header = ({ startLogout, isNavOpen, toggleNavBar }) => {
         </LeftContent>
         <LinkButton onClick={startLogout}>Déconnexion</LinkButton>
       </HeaderContent>
-    </ContentContainer>
   </StyledHeader>
   );
 }
