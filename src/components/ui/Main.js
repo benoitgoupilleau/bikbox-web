@@ -23,7 +23,7 @@ const Main = ({ isAdmin, pathName, children }) => (
 );
 
 const mapStateToProps = state => ({
-  isAdmin: true //state.auth.user.userType === 'admin'
+  isAdmin: state.auth.user.userType === 'admin'
 })
 
 export default connect(mapStateToProps)(Main);
