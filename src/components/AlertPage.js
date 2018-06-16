@@ -2,10 +2,11 @@ import React from 'react';
 
 import Main from './ui/Main';
 
-const DashboardPage = (props) => (
+
+const AlertPage = (props) => (
   <Main pathName={props.location.pathname} >
-    DashBoard
+    Alert page
   </Main>
 );
 
-export default DashboardPage;
+export default AlertPage;

@@ -1,9 +1,10 @@
 export default {
   baseFontSize: '62.5%',
+  headerHeight: '9rem',
   colors: {
     brandPrimary: '#003d5c',
     brandSecondary: '#E3DE00',
-    brandTertiary: '#CAD2C5',
+    brandTertiary: 'rgb(0, 61, 92, 0.7)',
     defaultColor: '#fff',
     darkGrey: '#333',
     grey: '#666',

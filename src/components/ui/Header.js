@@ -2,21 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { startLogout } from '../actions/auth';
-import { toggleNavBar } from '../actions/user';
+import { startLogout } from '../../actions/auth';
+import { toggleNavBar } from '../../actions/user';
 
-import theme from '../styles/theme';
+import theme from '../../styles/theme';
 
 const StyledHeader = styled.header`
   background: ${theme.colors.brandPrimary};
+  height: ${theme.headerHeight};
   padding: 0 ${theme.spacing.m};
 `;
 
 const HeaderContent = styled.div`
   align-items: center;
   display: flex;
+  height: 100%;
   justify-content: space-between;
-  max-width: 80rem;
   padding: ${theme.spacing.s} 0 0 0;
 `;
 
@@ -26,7 +27,7 @@ const HeaderTitle =  styled(Link)`
   h1 {
     margin: 0;
     img {
-      min-width: 143px;
+      width: 18rem;
     }
   }
 `;

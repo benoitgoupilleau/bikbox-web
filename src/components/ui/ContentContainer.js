@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import theme from '../../styles/theme';
 
 const Wrapper = styled.div`
+  color: ${theme.colors.brandPrimary};
   margin: 0 auto;
   max-width: 80rem;
   padding: ${theme.spacing.l} ${theme.spacing.m};

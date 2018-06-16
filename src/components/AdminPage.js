@@ -2,10 +2,11 @@ import React from 'react';
 
 import Main from './ui/Main';
 
-const DashboardPage = (props) => (
+
+const AdminPage = (props) => (
   <Main pathName={props.location.pathname} >
-    DashBoard
+    Admin page
   </Main>
 );
 
-export default DashboardPage;
+export default AdminPage;

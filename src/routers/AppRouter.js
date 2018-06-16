@@ -4,6 +4,8 @@ import { injectGlobal } from 'styled-components';
 import createHistory from 'history/createBrowserHistory';
 import LoginPage from '../components/LoginPage';
 import DashboardPage from '../components/DashboardPage';
+import AdminPage from '../components/AdminPage';
+import AlertPage from '../components/AlertPage';
 import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -46,6 +48,8 @@ const AppRouter = () => (
       <Switch>
         <PublicRoute path="/" component={LoginPage} exact />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
+        <PrivateRoute path="/admin" component={AdminPage} />
+        <PrivateRoute path="/alerts" component={AlertPage} />
         <PublicRoute path="/resetpassword/:token" component={ResetPasswordPage} />
         <Route component={NotFoundPage} />
       </Switch>
