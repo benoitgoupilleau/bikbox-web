@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import validator from 'validator';
-import { startLogin } from '../actions/auth';
+import { startLogin } from '../actions/user';
 
 import Background from './ui/Background';
 import BoxLayout from './ui/BoxLayout';
@@ -78,7 +78,7 @@ class LoginPage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  errorLogin: state.auth.errorLogin
+  errorLogin: state.user.errorLogin
 })
 
 export default connect(mapStateToProps, { startLogin })(LoginPage);

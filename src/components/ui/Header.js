@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { startLogout } from '../../actions/auth';
-import { toggleNavBar } from '../../actions/user';
+import { startLogout, toggleNavBar } from '../../actions/user';
 
 import theme from '../../styles/theme';
 

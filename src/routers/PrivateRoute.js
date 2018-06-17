@@ -22,7 +22,7 @@ export const PrivateRoute = ({
 );
 
 const maptStateToProps = (state) => ({
-  isAuthenticated: !!state.auth.authToken
+  isAuthenticated: !!state.user.authToken
 });
 
 export default connect(maptStateToProps)(PrivateRoute);

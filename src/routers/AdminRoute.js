@@ -24,8 +24,8 @@ export const PrivateRoute = ({
 );
 
 const maptStateToProps = (state) => ({
-  isAuthenticated: !!state.auth.authToken,
-  isAdmin: state.auth.user.userType === 'admin'
+  isAuthenticated: !!state.user.authToken,
+  isAdmin: state.user.user.userType === 'admin'
 });
 
 export default connect(maptStateToProps)(PrivateRoute);
