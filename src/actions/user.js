@@ -26,7 +26,14 @@ export const logout = () => ({
   type: LOGOUT
 });
 
-export const startLogout = () => dispatch => dispatch(logout());
+export const errorLogout = () => ({
+  type: LOGIN_FAIL
+});
+
+export const startLogout = () => dispatch => axios.delete('/adminusers/token')
+  .then(() => dispatch(logout()))
+  .catch(() => dispatch(errorLogout()))
+
 
 export const toggleNavBar = () => ({
   type: TOGGLE_NAV
