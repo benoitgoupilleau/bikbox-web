@@ -8,6 +8,8 @@ import {
   TOGGLE_NAV
 } from './types';
 
+import store from '../store/configureStore';
+
 export const login = (authToken, user) => ({
   type: LOGIN,
   authToken,
@@ -18,7 +20,7 @@ export const errorLogin = () => ({
   type: LOGIN_FAIL
 });
 
-export const startLogin = (email, password) => dispatch => axios.post('/adminusers/login', { email, password })
+export const startLogin = (email, password) => dispatch => axios({ method: 'POST', url: '/adminusers/login', data: { email, password }, headers: { 'x-key': process.env.X_KEY } })
   .then((res) => dispatch(login(res.headers['x-auth'], res.data)))
   .catch(() => dispatch(errorLogin()))
 
@@ -30,7 +32,7 @@ export const errorLogout = () => ({
   type: LOGIN_FAIL
 });
 
-export const startLogout = () => dispatch => axios.delete('/adminusers/token')
+export const startLogout = () => dispatch => axios({ method: 'DELETE', url:'/adminusers/token', headers: { 'x-auth': store.getState().user.authToken } })
   .then(() => dispatch(logout()))
   .catch(() => dispatch(errorLogout()))
 
@@ -47,6 +49,6 @@ export const passwordNotUpdated = () => ({
   type: UPDATE_PASSWORD_FAIL
 });
 
-export const updatePassword = (token, password) => dispatch => axios.post(`/adminusers/resetpassword/${token}`, { password })
+export const updatePassword = (token, password) => dispatch => axios({ method: 'POST', url: `/adminusers/resetpassword/${token}`, data: { password }, headers: { 'x-auth': store.getState().user.authToken } })
   .then(() => dispatch(passwordUpdated()))
   .catch(() => dispatch(passwordNotUpdated()))

@@ -4,6 +4,8 @@ import {
   SET_SESSIONPLACE_FAIL
 } from './types';
 
+import store from '../store/configureStore';
+
 export const setSessionPlace = (sessions) => ({
   type: SET_SESSIONPLACE,
   sessions
@@ -14,7 +16,7 @@ export const setSessionPlaceFail = () => ({
 })
 
 export const getSessionPlace = () => dispatch => 
-  axios.get('/sessionPlaces')
+  axios({ method: 'GET', url:'/sessionPlaces', headers: { 'x-auth': store.getState().user.authToken } })
     .then((res) =>
       dispatch(setSessionPlace(res.data))
     )
