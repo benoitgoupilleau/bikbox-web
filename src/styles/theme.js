@@ -19,6 +19,7 @@ export default {
     tiny: '1.2rem'
   },
   spacing: {
+    xs: '0.5rem',
     s: '1.2rem',
     m: '1.6rem',
     l: '3.2rem',

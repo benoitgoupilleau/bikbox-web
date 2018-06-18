@@ -3,13 +3,15 @@ import thunk from 'redux-thunk';
 
 import userReducer from '../reducers/user';
 import sessionsReducer from '../reducers/sessions';
+import parkingsReducer from '../reducers/parkings';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const configureStore = () => {
   const store = createStore(combineReducers({
     user: userReducer,
-    sessions: sessionsReducer
+    sessions: sessionsReducer,
+    parkings: parkingsReducer
   }), composeEnhancers(applyMiddleware(thunk)));
 
   return store;

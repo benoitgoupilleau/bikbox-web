@@ -26,7 +26,8 @@ const HeaderTitle =  styled(Link)`
   h1 {
     margin: 0;
     img {
-      width: 18rem;
+      max-width: 18rem;
+      min-width: 14rem;
     }
   }
 `;

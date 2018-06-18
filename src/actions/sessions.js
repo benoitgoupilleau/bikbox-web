@@ -17,7 +17,5 @@ export const setSessionPlaceFail = () => ({
 
 export const getSessionPlace = () => dispatch => 
   axios({ method: 'GET', url:'/sessionPlaces', headers: { 'x-auth': store.getState().user.authToken } })
-    .then((res) =>
-      dispatch(setSessionPlace(res.data))
-    )
-    .catch(() => {})
+    .then((res) => dispatch(setSessionPlace(res.data)))
+    .catch(() => dispatch(setSessionPlaceFail()))
