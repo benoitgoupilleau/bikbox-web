@@ -1,11 +1,13 @@
 import {
   SET_SESSIONPLACE,
+  SET_SESSIONPLACE_FAIL,
   LOGOUT
 } from '../actions/types';
 
 const defaultSessionsState = {
   sessionPlace: [],
-  sessionPlaceLoaded: false
+  sessionPlaceLoaded: false,
+  errorLoading: false
 }
 
 export default (state = defaultSessionsState, action) => {
@@ -14,7 +16,13 @@ export default (state = defaultSessionsState, action) => {
       return {
         ...state,
         sessionPlace: action.sessions,
-        sessionPlaceLoaded: true
+        sessionPlaceLoaded: true,
+        errorLoading: false
+      }
+    case SET_SESSIONPLACE_FAIL:
+      return {
+        sessionPlaceLoaded: false,
+        errorLoading: true
       }
     case LOGOUT:
       return defaultSessionsState

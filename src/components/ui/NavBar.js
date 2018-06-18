@@ -46,21 +46,33 @@ const SyledLink = styled(Link)`
 `;
 
 
-const NavBar = ({ pathName, isNavOpen, toggleNavBar }) => (
-  <SideBar isNavOpen={isNavOpen} >
-    <Wrapper>
-      <SyledLink to='/dashboard' className={pathName === '/dashboard' ? 'isSelected' : ''} onClick={toggleNavBar}>
-        <i className="fas fa-columns" /> Dashboard
+class NavBar extends React.Component {
+
+  onClick = () => {
+    if (this.props.isNavOpen) {
+      this.props.toggleNavBar();
+    }
+  }
+
+  render() {
+    const { pathName, isNavOpen } = this.props;
+    return (
+      <SideBar isNavOpen={isNavOpen} >
+        <Wrapper>
+          <SyledLink to='/dashboard' className={pathName === '/dashboard' ? 'isSelected' : ''} onClick={this.onClick}>
+            <i className="fas fa-columns" /> Dashboard
       </SyledLink>
-      <SyledLink to='/alerts' className={pathName === '/alerts' ? 'isSelected' : ''} onClick={toggleNavBar}>
-        <i className="far fa-bell" /> Alertes
+          <SyledLink to='/alerts' className={pathName === '/alerts' ? 'isSelected' : ''} onClick={this.onClick}>
+            <i className="far fa-bell" /> Alertes
       </SyledLink>
-      <SyledLink to='/admin' className={pathName === '/admin' ? 'isSelected' : ''} onClick={toggleNavBar}>
-        <i className="fas fa-lock" /> Admin
+          <SyledLink to='/admin' className={pathName === '/admin' ? 'isSelected' : ''} onClick={this.onClick}>
+            <i className="fas fa-lock" /> Admin
       </SyledLink>
-    </Wrapper>
-  </SideBar>
-);
+        </Wrapper>
+      </SideBar>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   isNavOpen: state.user.isNavOpen

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import Main from './ui/Main';
 
@@ -23,7 +24,8 @@ class DashboardPage extends React.Component {
 
 const mapStateToProps =  state => ({
   sessionPlace: state.sessions.sessionPlace,
-  sessionPlaceLoaded: state.sessions.sessionPlaceLoaded
+  sessionPlaceLoaded: state.sessions.sessionPlaceLoaded,
+  errorLoading: state.sessions.errorLoading
 })
 
 export default connect(mapStateToProps, { getSessionPlace })(DashboardPage);

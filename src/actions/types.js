@@ -8,3 +8,4 @@ export const TOGGLE_NAV = 'TOGGLE_NAV';
 
 // Sessions action
 export const SET_SESSIONPLACE = 'SET_SESSIONPLACE';
+export const SET_SESSIONPLACE_FAIL = 'SET_SESSIONPLACE_FAIL';

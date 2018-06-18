@@ -9,6 +9,7 @@ const instance = axios.create({
   headers: {
     ['x-key']: process.env.X_KEY,
     ['Content-Type']: 'application/json',
+    ['x-auth']: store.getState().user.authToken
   }
 });
 
