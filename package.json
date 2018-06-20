@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node server/server.js",
-    "dev": "yarn run build:dev && node server/server.js",
+    "dev": "yarn run build:dev && source .env.dev && node server/server.js",
     "build:dev": "webpack --mode=development --devtool=inline-source-map",
     "build:prod": "webpack -p --env production --mode=production --devtool=source-map",
     "dev-server": "webpack-dev-server --mode=development --devtool=inline-source-maps",
@@ -32,6 +32,7 @@
     "moment": "^2.22.1",
     "numeral": "^2.0.6",
     "prop-types": "^15.6.1",
+    "raven": "^2.6.2",
     "react": "^16.0.0",
     "react-addons-shallow-compare": "^15.6.2",
     "react-dom": "^16.0.0",

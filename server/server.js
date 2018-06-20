@@ -1,7 +1,12 @@
+const Raven = require('raven');
+Raven.config(process.env.SENTRY_DSN).install();
+
 const express = require('express');
 const path = require('path');
 
 const app = express();
+app.use(Raven.requestHandler());
+app.use(Raven.errorHandler());
 const publicPath = path.join(__dirname, '..', 'public');
 
 const port = process.env.PORT || 3000;

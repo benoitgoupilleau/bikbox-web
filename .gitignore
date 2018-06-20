@@ -4,3 +4,4 @@ public/dist/
 .env.*
 src/tests
 .vscode
+.env
