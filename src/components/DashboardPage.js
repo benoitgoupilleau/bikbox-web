@@ -8,6 +8,7 @@ import SessionItem from './SessionItem';
 
 import { getSessionPlace } from '../actions/sessions';
 import { getParking } from '../actions/parkings';
+import { sessionPerParking } from '../selectors/sessions';
 import theme from '../styles/theme';
 
 const SessionList = styled.div`
@@ -70,7 +71,8 @@ const mapStateToProps =  state => ({
   errorSession: state.sessions.errorLoading,
   parkings: state.parkings.parkings,
   parkingsLoaded: state.parkings.parkingsLoaded,
-  errorParking: state.parkings.errorLoading
+  errorParking: state.parkings.errorLoading,
+  data: sessionPerParking(state.parkings.parkings, state.sessions.sessionPlace)
 })
 
 export default connect(mapStateToProps, { getSessionPlace, getParking })(DashboardPage);

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
+import { history } from '../routers/AppRouter';
+
 import Background from './ui/Background';
 import BoxLayout from './ui/BoxLayout';
 import Button from './ui/Button';
@@ -77,7 +79,9 @@ export class ResetPasswordPage extends React.Component {
         passwordUpdated: true,
         password1: '',
         password2: ''
-      }))
+      }, () => setTimeout(() => {
+        history.push('/');
+      }, 2000)))
       .catch(() => this.setState({
         loading: false,
         passwordUpdated: false,
