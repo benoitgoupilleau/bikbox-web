@@ -14,7 +14,8 @@ module.exports = (env) => {
     new webpack.DefinePlugin({
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.X_KEY': JSON.stringify(process.env.X_KEY),
-      'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN)
+      'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
+      'process.env.PERSIST_KEY': JSON.stringify(process.env.PERSIST_KEY)
     })
   ];
   if (isProduction) {

@@ -4,7 +4,7 @@ import {
   SET_SESSIONPLACE_FAIL
 } from './types';
 
-import store from '../store/configureStore';
+import { store } from '../store/store';
 
 export const setSessionPlace = (sessions) => ({
   type: SET_SESSIONPLACE,

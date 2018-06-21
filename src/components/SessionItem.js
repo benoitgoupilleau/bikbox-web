@@ -30,8 +30,8 @@ const EndDate = styled.p`
 const SessionItem = (props) => (
   <SessionsWrapper>
     <Capteur>{props.identifier}</Capteur>
-    <StartDate>{moment(props.startDate).locale('fr').format('L LT')}</StartDate>
-    <EndDate>{props.endDate ? moment(props.endDate).locale('fr').format('L LT') : '-'}</EndDate>
+    <StartDate>{moment.unix(props.startDate).locale('fr').format('L LT')}</StartDate>
+    <EndDate>{props.endDate ? moment.unix(props.endDate).locale('fr').format('L LT') : '-'}</EndDate>
   </SessionsWrapper>
 )
 

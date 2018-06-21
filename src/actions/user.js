@@ -8,11 +8,12 @@ import {
   TOGGLE_NAV
 } from './types';
 
-import store from '../store/configureStore';
+import { store } from '../store/store';
 
-export const login = (authToken, user) => ({
+export const login = (authToken, expiresIn, user) => ({
   type: LOGIN,
   authToken,
+  expiresIn,
   user
 });
 
@@ -21,7 +22,7 @@ export const errorLogin = () => ({
 });
 
 export const startLogin = (email, password) => dispatch => axios({ method: 'POST', url: '/adminusers/login', data: { email, password }, headers: { 'x-key': process.env.X_KEY } })
-  .then((res) => dispatch(login(res.headers['x-auth'], res.data)))
+  .then((res) => dispatch(login(res.headers['x-auth'], res.headers['x-auth-expire'], res.data)))
   .catch(() => dispatch(errorLogin()))
 
 export const logout = () => ({

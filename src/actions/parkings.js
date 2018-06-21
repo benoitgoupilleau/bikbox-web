@@ -4,7 +4,7 @@ import {
   SET_PARKING_FAIL
 } from './types';
 
-import store from '../store/configureStore';
+import { store } from '../store/store';
 
 export const setParking = (parkings) => ({
   type: SET_PARKING,
