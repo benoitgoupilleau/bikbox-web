@@ -10,7 +10,7 @@ import sessionsReducer from '../reducers/sessions';
 import parkingsReducer from '../reducers/parkings';
 import alertsReducer from '../reducers/alerts';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = process.env.NODE_ENV === 'production' ? compose : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const encryptor = createEncryptor({
   secretKey: process.env.PERSIST_KEY,
