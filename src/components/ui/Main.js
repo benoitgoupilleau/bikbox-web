@@ -9,7 +9,7 @@ import theme from '../../styles/theme';
 
 const MainWrapper =  styled.div`
   background: ${theme.colors.offWhite};
-  height: calc(100vh - ${theme.headerHeight});
+  min-height: calc(100vh - ${theme.headerHeight});
   display: flex;
 `;
 
