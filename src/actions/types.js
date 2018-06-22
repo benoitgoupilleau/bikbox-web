@@ -13,3 +13,7 @@ export const SET_SESSIONPLACE_FAIL = 'SET_SESSIONPLACE_FAIL';
 // Sessions action
 export const SET_PARKING = 'SET_PARKING';
 export const SET_PARKING_FAIL = 'SET_PARKING_FAIL';
+
+// Alert action
+export const SET_ALERT = 'SET_ALERT';
+export const SET_ALERT_FAIL = 'SET_ALERT_FAIL';

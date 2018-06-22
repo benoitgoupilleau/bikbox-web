@@ -8,6 +8,7 @@ import createEncryptor from 'redux-persist-transform-encrypt'
 import userReducer from '../reducers/user';
 import sessionsReducer from '../reducers/sessions';
 import parkingsReducer from '../reducers/parkings';
+import alertsReducer from '../reducers/alerts';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,7 +22,8 @@ const encryptor = createEncryptor({
 const rootReducer = combineReducers({
   user: userReducer,
   sessions: sessionsReducer,
-  parkings: parkingsReducer
+  parkings: parkingsReducer,
+  alerts: alertsReducer
 });
 
 const persistConfig = {

@@ -8,6 +8,7 @@ import SessionItem from './SessionItem';
 
 import { getSessionPlace } from '../actions/sessions';
 import { getParking } from '../actions/parkings';
+import { getAlert } from '../actions/alerts';
 import { sessionPerParking } from '../selectors/sessions';
 import theme from '../styles/theme';
 
@@ -40,11 +41,12 @@ const EndDate = styled.p`
 `;
 class DashboardPage extends React.Component {
   componentDidMount() {
-    if (!this.props.sessionPlaceLoaded) {
-      this.props.getSessionPlace()
+    if (!this.props.userDataLoaded) {
+      this.props.getSessionPlace();
+      this.props.getParking();
     }
-    if (!this.props.parkingsLoaded) {
-      this.props.getParking()
+    if (!this.props.adminDataLoaded) {
+      this.props.getAlert();
     }
   }
 
@@ -67,12 +69,12 @@ class DashboardPage extends React.Component {
 
 const mapStateToProps =  state => ({
   sessionPlace: state.sessions.sessionPlace,
-  sessionPlaceLoaded: state.sessions.sessionPlaceLoaded,
+  userDataLoaded: state.sessions.sessionPlaceLoaded && state.parkings.parkingsLoaded,
   errorSession: state.sessions.errorLoading,
   parkings: state.parkings.parkings,
-  parkingsLoaded: state.parkings.parkingsLoaded,
   errorParking: state.parkings.errorLoading,
+  adminDataLoaded: state.alerts.alertsLoaded,
   data: sessionPerParking(state.parkings.parkings, state.sessions.sessionPlace)
 })
 
-export default connect(mapStateToProps, { getSessionPlace, getParking })(DashboardPage);
+export default connect(mapStateToProps, { getSessionPlace, getParking, getAlert })(DashboardPage);
