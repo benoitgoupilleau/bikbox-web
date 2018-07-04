@@ -22,6 +22,12 @@ const AdminPage = (props) => (
 	    "userType": "admin", (valeurs possibles : 'admin', 'entityManager', 'admin')
 	    "email": "email@me.com"
     </div>
+    <p></p>
+    <div>route: /adminusers/entity (pour donner accès à une entité à un user donnée</div>
+    <div>body :
+      "userId": "_id du user auquel on souhaite donner accès",
+	    "entiyId": "_id de l'entité auquelle le user doit avoir accès"
+    </div>
     <h3>Parking</h3>
     <div>route: /parking</div>
     <div>body :
