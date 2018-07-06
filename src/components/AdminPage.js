@@ -52,6 +52,7 @@ const AdminPage = (props) => (
       "identifier": "bb1c1",
       "_station": "_id d'une station existante",
       "_entity": "_id d'une entité existante",
+      "_parking": "_id du parking",
       "firmwareVersion": "0.1",
       "voltage": "120V"
     </div>
