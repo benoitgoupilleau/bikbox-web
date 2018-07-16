@@ -9,8 +9,9 @@ import theme from '../../styles/theme';
 
 const MainWrapper =  styled.div`
   background: ${theme.colors.offWhite};
-  min-height: calc(100vh - ${theme.headerHeight});
   display: flex;
+  max-width: 100vw;
+  min-height: calc(100vh - ${theme.headerHeight});
 `;
 
 const Main = ({ isAdmin, pathName, children }) => (

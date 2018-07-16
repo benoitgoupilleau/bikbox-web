@@ -17,3 +17,7 @@ export const SET_PARKING_FAIL = 'SET_PARKING_FAIL';
 // Alert action
 export const SET_ALERT = 'SET_ALERT';
 export const SET_ALERT_FAIL = 'SET_ALERT_FAIL';
+
+// Sensor action
+export const SET_SENSOR = 'SET_SENSOR';
+export const SET_SENSOR_FAIL = 'SET_SENSOR_FAIL';
