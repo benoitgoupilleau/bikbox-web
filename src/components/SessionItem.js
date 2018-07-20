@@ -39,7 +39,7 @@ const SessionItem = (props) => (
   <SessionsWrapper>
     <Capteur>{props.identifier}</Capteur>
     <StartDate>{moment.unix(props.startDate).locale('fr').format('L LT')}</StartDate>
-    <EndDate>{props.endDate ? moment.unix(props.endDate).locale('fr').format('L LT') : '-'}</EndDate>
+    <EndDate>{props.endDate ? (props.endDate.toString() === '-999' ? 'Non clôturée' : moment.unix(props.endDate).locale('fr').format('L LT')) : '-'}</EndDate>
     {props.isAdmin ? <Actions onClick={() => props.dispatchDelSession(props._id)}><i className="fa fa-trash-alt" /></Actions> : undefined}
   </SessionsWrapper>
 )
