@@ -10,6 +10,7 @@ import sessionsReducer from '../reducers/sessions';
 import parkingsReducer from '../reducers/parkings';
 import alertsReducer from '../reducers/alerts';
 import sensorsReducer from '../reducers/sensors';
+import sessionFilterReducer from '../reducers/sessionFilter';
 
 const composeEnhancers = process.env.NODE_ENV === 'production' ? compose : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -23,6 +24,7 @@ const encryptor = createEncryptor({
 const rootReducer = combineReducers({
   user: userReducer,
   sessions: sessionsReducer,
+  sessionFilter: sessionFilterReducer,
   parkings: parkingsReducer,
   alerts: alertsReducer,
   sensors: sensorsReducer

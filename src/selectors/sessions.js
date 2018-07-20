@@ -10,4 +10,8 @@ export const sessionPerParking = (parkings, sessions) => {
     sessionPerParkingData.push(parkings[i]);
   }
   return sessionPerParkingData
-} 
+}
+
+export const filterSession = (sessions, filter) => {
+  return sessions.sort((a, b) => a[filter.sorting.value] > b[filter.sorting.value] ? filter.sorting.order : -filter.sorting.order)
+}

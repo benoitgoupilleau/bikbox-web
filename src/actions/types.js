@@ -11,7 +11,9 @@ export const SET_SESSIONPLACE = 'SET_SESSIONPLACE';
 export const SET_SESSIONPLACE_FAIL = 'SET_SESSIONPLACE_FAIL';
 export const DELETE_SESSION = 'DELETE_SESSION';
 
-// Sessions action
+// Filter session action
+
+// Parking action
 export const SET_PARKING = 'SET_PARKING';
 export const SET_PARKING_FAIL = 'SET_PARKING_FAIL';
 

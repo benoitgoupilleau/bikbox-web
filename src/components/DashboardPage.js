@@ -11,7 +11,7 @@ import { getSessionPlace } from '../actions/sessions';
 import { getParking } from '../actions/parkings';
 import { getAlert } from '../actions/alerts';
 import { getSensor } from '../actions/sensors';
-import { sessionPerParking } from '../selectors/sessions';
+import { sessionPerParking, filterSession } from '../selectors/sessions';
 import theme from '../styles/theme';
 
 const SensorList = styled.div`
@@ -99,7 +99,7 @@ class DashboardPage extends React.Component {
             <EndDate>Date de fin</EndDate>
             {this.props.userAdmin ? <Actions><i className="fa fa-wrench"/></Actions> : undefined}
           </SessionsTitle>
-          {this.props.sessionPlace.map((session, index) => <SessionItem key={index} {...session} isAdmin={this.props.userAdmin} />)}
+          {this.props.filteredSession.map((session, index) => <SessionItem key={index} {...session} isAdmin={this.props.userAdmin} />)}
         </SessionList>
       </Main>
     );
@@ -109,6 +109,7 @@ class DashboardPage extends React.Component {
 const mapStateToProps =  state => ({
   userAdmin: state.user.user.userType === 'admin',
   sessionPlace: state.sessions.sessionPlace,
+  filteredSession: filterSession(state.sessions.sessionPlace, state.sessionFilter),
   userDataLoaded: state.sessions.sessionPlaceLoaded && state.parkings.parkingsLoaded && state.sensors.sensorsLoaded,
   errorSession: state.sessions.errorLoading,
   parkings: state.parkings.parkings,
