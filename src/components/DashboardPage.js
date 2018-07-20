@@ -58,8 +58,14 @@ const StartDate = styled.p`
 `;
 
 const EndDate = styled.p`
-  width: 30%;
+  width: 25%;
 `;
+
+const Actions = styled.p`
+  text-align: right;
+  width: 5%;
+`;
+
 class DashboardPage extends React.Component {
   componentDidMount() {
     if (!this.props.userDataLoaded) {
@@ -91,8 +97,9 @@ class DashboardPage extends React.Component {
             <Capteur>Capteur</Capteur>
             <StartDate>Date de début</StartDate>
             <EndDate>Date de fin</EndDate>
+            {this.props.userAdmin ? <Actions><i className="fa fa-wrench"/></Actions> : undefined}
           </SessionsTitle>
-          {this.props.sessionPlace.map((session, index) => <SessionItem key={index} {...session} />)}
+          {this.props.sessionPlace.map((session, index) => <SessionItem key={index} {...session} isAdmin={this.props.userAdmin} />)}
         </SessionList>
       </Main>
     );
@@ -100,6 +107,7 @@ class DashboardPage extends React.Component {
 }
 
 const mapStateToProps =  state => ({
+  userAdmin: state.user.user.userType === 'admin',
   sessionPlace: state.sessions.sessionPlace,
   userDataLoaded: state.sessions.sessionPlaceLoaded && state.parkings.parkingsLoaded && state.sensors.sensorsLoaded,
   errorSession: state.sessions.errorLoading,

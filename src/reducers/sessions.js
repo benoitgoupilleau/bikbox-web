@@ -1,6 +1,7 @@
 import {
   SET_SESSIONPLACE,
   SET_SESSIONPLACE_FAIL,
+  DELETE_SESSION,
   LOGOUT
 } from '../actions/types';
 
@@ -24,6 +25,13 @@ export default (state = defaultSessionsState, action) => {
         sessionPlaceLoaded: false,
         errorLoading: true
       }
+    case DELETE_SESSION: {
+      const currentSession = [ ...state.sessionPlace];
+      const filteredSession = currentSession.filter((session) => session._id !== action._id);
+      return {
+        sessionPlace: [ ...filteredSession]
+      }
+    }
     case LOGOUT:
       return defaultSessionsState
     default:

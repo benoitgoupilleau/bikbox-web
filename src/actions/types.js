@@ -9,6 +9,7 @@ export const TOGGLE_NAV = 'TOGGLE_NAV';
 // Sessions action
 export const SET_SESSIONPLACE = 'SET_SESSIONPLACE';
 export const SET_SESSIONPLACE_FAIL = 'SET_SESSIONPLACE_FAIL';
+export const DELETE_SESSION = 'DELETE_SESSION';
 
 // Sessions action
 export const SET_PARKING = 'SET_PARKING';
