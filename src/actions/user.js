@@ -17,13 +17,14 @@ export const login = (authToken, expiresIn, user) => ({
   user
 });
 
-export const errorLogin = () => ({
-  type: LOGIN_FAIL
+export const errorLogin = (status) => ({
+  type: LOGIN_FAIL,
+  status
 });
 
 export const startLogin = (email, password) => dispatch => axios({ method: 'POST', url: '/adminusers/login', data: { email, password }, headers: { 'x-key': process.env.X_KEY } })
   .then((res) => dispatch(login(res.headers['x-auth'], res.headers['x-auth-expire'], res.data)))
-  .catch(() => dispatch(errorLogin()))
+  .catch((res) => dispatch(errorLogin(res.response.status)))
 
 export const logout = () => ({
   type: LOGOUT
