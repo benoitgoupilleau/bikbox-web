@@ -10,6 +10,8 @@ export const TOGGLE_NAV = 'TOGGLE_NAV';
 export const SET_SESSIONPLACE = 'SET_SESSIONPLACE';
 export const SET_SESSIONPLACE_FAIL = 'SET_SESSIONPLACE_FAIL';
 export const DELETE_SESSION = 'DELETE_SESSION';
+export const UPDATE_SESSION = 'UPDATE_SESSION';
+export const UPDATE_SESSION_FAIL = 'UPDATE_SESSION_FAIL';
 
 // Filter session action
 

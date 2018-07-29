@@ -17,6 +17,8 @@ import theme from '../styles/theme';
 injectGlobal`
   * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
   html{
     font-size: ${theme.baseFontSize};
@@ -31,7 +33,6 @@ injectGlobal`
   button{
     cursor: pointer;
   }
-
   button:disabled{
     cursor: default;
   }

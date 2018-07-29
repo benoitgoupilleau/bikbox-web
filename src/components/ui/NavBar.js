@@ -61,13 +61,13 @@ class NavBar extends React.Component {
         <Wrapper>
           <SyledLink to='/dashboard' className={pathName === '/dashboard' ? 'isSelected' : ''} onClick={this.onClick}>
             <i className="fas fa-columns" /> Dashboard
-      </SyledLink>
+          </SyledLink>
           <SyledLink to='/alerts' className={pathName === '/alerts' ? 'isSelected' : ''} onClick={this.onClick}>
             <i className="far fa-bell" /> Alertes
-      </SyledLink>
+          </SyledLink>
           <SyledLink to='/admin' className={pathName === '/admin' ? 'isSelected' : ''} onClick={this.onClick}>
             <i className="fas fa-lock" /> Admin
-      </SyledLink>
+          </SyledLink>
         </Wrapper>
       </SideBar>
     );

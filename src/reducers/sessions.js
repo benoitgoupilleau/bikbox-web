@@ -2,7 +2,8 @@ import {
   SET_SESSIONPLACE,
   SET_SESSIONPLACE_FAIL,
   DELETE_SESSION,
-  LOGOUT
+  LOGOUT,
+  UPDATE_SESSION
 } from '../actions/types';
 
 const defaultSessionsState = {
@@ -30,6 +31,21 @@ export default (state = defaultSessionsState, action) => {
       const filteredSession = currentSession.filter((session) => session._id !== action._id);
       return {
         sessionPlace: [ ...filteredSession]
+      }
+    }
+    case UPDATE_SESSION: {
+      const sessionPlaceUpdated = state.sessionPlace.map((session) => {
+        if (session._id === action._id) {
+          return {
+            ...session,
+            endDate: action.endDate
+          }
+        } 
+        return session;
+      })
+      return {
+        ...state,
+        sessionPlace: sessionPlaceUpdated
       }
     }
     case LOGOUT:

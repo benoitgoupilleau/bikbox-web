@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { connect } from 'react-redux';
 
+import CloseSessionIcon from './CloseSessionIcon';
+
 import { dispatchDelSession } from '../actions/sessions';
 
 import theme from '../styles/theme';
@@ -31,8 +33,13 @@ const EndDate = styled.p`
 `;
 
 const Actions = styled.p`
+  min-width: 30px;
   text-align: right;
   width: 5%;
+`;
+
+const DeleteIcon = styled.i`
+  cursor: pointer;
 `;
 
 const SessionItem = (props) => (
@@ -40,7 +47,12 @@ const SessionItem = (props) => (
     <Capteur>{props.identifier}</Capteur>
     <StartDate>{moment.unix(props.startDate).locale('fr').format('L LT')}</StartDate>
     <EndDate>{props.endDate ? (props.endDate.toString() === '-999' ? 'Non clôturée' : moment.unix(props.endDate).locale('fr').format('L LT')) : '-'}</EndDate>
-    {props.isAdmin ? <Actions onClick={() => props.dispatchDelSession(props._id)}><i className="fa fa-trash-alt" /></Actions> : undefined}
+    {props.isAdmin ? 
+      <Actions>
+        <CloseSessionIcon {...props}/>
+        <DeleteIcon onClick={() => props.dispatchDelSession(props._id)} className="fa fa-trash-alt" />
+      </Actions>
+    : undefined}
   </SessionsWrapper>
 )
 
