@@ -12,6 +12,7 @@ const defaultSessionsState = {
   sessionPlace: [],
   deletedSession: [],
   sessionPlaceLoaded: false,
+  deletedSessionLoaded: false,
   errorLoading: false
 }
 
@@ -46,7 +47,8 @@ export default (state = defaultSessionsState, action) => {
     case SET_DELETED_SESSIONPLACE:
       return {
         ...state,
-        deletedSession: action.sessions
+        deletedSession: action.sessions,
+        deletedSessionLoaded: true
       }
     case REACTIVE_DELETED_SESSIONPLACE: {
       const currentDeletedSession = [...state.deletedSession];
