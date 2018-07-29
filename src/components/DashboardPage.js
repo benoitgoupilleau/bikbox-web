@@ -7,7 +7,7 @@ import Main from './ui/Main';
 import SessionItem from './SessionItem';
 import SensorItem from './SensorItem';
 
-import { getSessionPlace } from '../actions/sessions';
+import { getSessionPlace, getDeletedSession } from '../actions/sessions';
 import { getParking } from '../actions/parkings';
 import { getAlert } from '../actions/alerts';
 import { getSensor } from '../actions/sensors';
@@ -75,6 +75,7 @@ class DashboardPage extends React.Component {
     }
     if (!this.props.adminDataLoaded) {
       this.props.getAlert();
+      this.props.getDeletedSession();
     }
   }
 
@@ -121,4 +122,10 @@ const mapStateToProps =  state => ({
   data: sessionPerParking(state.parkings.parkings, state.sessions.sessionPlace)
 })
 
-export default connect(mapStateToProps, { getSessionPlace, getParking, getAlert, getSensor })(DashboardPage);
+export default connect(mapStateToProps, {
+  getSessionPlace,
+  getParking,
+  getAlert,
+  getSensor,
+  getDeletedSession
+})(DashboardPage);

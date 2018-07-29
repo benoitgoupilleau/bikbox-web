@@ -2,18 +2,20 @@ import axios from '../helpers/axios';
 import {
   SET_SESSIONPLACE,
   SET_SESSIONPLACE_FAIL,
+  SET_DELETED_SESSIONPLACE,
+  REACTIVE_DELETED_SESSIONPLACE,
   DELETE_SESSION,
   UPDATE_SESSION
 } from './types';
 
 import { store } from '../store/store';
 
-export const setSessionPlace = (sessions) => ({
+const setSessionPlace = (sessions) => ({
   type: SET_SESSIONPLACE,
   sessions
 })
 
-export const setSessionPlaceFail = () => ({
+const setSessionPlaceFail = () => ({
   type: SET_SESSIONPLACE_FAIL,
 })
 
@@ -22,7 +24,25 @@ export const getSessionPlace = () => dispatch =>
     .then((res) => dispatch(setSessionPlace(res.data)))
     .catch(() => dispatch(setSessionPlaceFail()))
 
-export const deleteOneSession = (_id) => ({
+const setDeletedSession = (sessions) => ({
+  type: SET_DELETED_SESSIONPLACE,
+  sessions
+})
+
+export const getDeletedSession = () => dispatch =>
+  axios({ method: 'GET', url: '/sessionPlaces/inactive', headers: { 'x-auth': store.getState().user.authToken } })
+    .then((res) => dispatch(setDeletedSession(res.data)))
+
+const updateDeletedSession = (_id) => ({
+  type: REACTIVE_DELETED_SESSIONPLACE,
+  _id
+})
+
+export const reactiveDeletedSession = (_id) => dispatch =>
+  axios({ method: 'PUT', url: `/sessionPlaces/inactive/${_id}`, headers: { 'x-auth': store.getState().user.authToken } })
+    .then(() => dispatch(updateDeletedSession(_id)))
+
+const deleteOneSession = (_id) => ({
   type: DELETE_SESSION,
   _id
 })
@@ -31,7 +51,7 @@ export const dispatchDelSession = (_id) => dispatch =>
   axios({ method: 'DELETE', url: `/sessionPlaces/${_id}`, headers: { 'x-auth': store.getState().user.authToken } })
     .then(() => dispatch(deleteOneSession(_id)))
 
-export const updateSession = (_id, endDate) => ({
+const updateSession = (_id, endDate) => ({
   type: UPDATE_SESSION,
   _id,
   endDate

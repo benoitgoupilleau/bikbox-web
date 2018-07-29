@@ -1,12 +1,60 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
  
 import Main from './ui/Main';
+import SessionItem from './SessionItem';
+import { filterSession } from '../selectors/sessions';
 
+import theme from '../styles/theme';
+
+
+const SessionList = styled.div`
+  background: white;
+  border-radius: 10px;
+  padding: ${theme.spacing.s};
+  margin-bottom: ${theme.spacing.s};
+`;
+
+const SessionsTitle = styled.div`
+  border-bottom: 1px solid ${theme.colors.brandTertiary};
+  display: flex;
+  width: 100%;
+
+  p {
+    margin: ${theme.spacing.s} 0;
+  }
+`;
+
+const Capteur = styled.p`
+  width: 40%;
+`;
+
+const StartDate = styled.p`
+  width: 30%;
+`;
+
+const EndDate = styled.p`
+  width: 25%;
+`;
+
+const Actions = styled.p`
+  text-align: right;
+  width: 5%;
+`;
 
 const AdminPage = (props) => (
   <Main pathName={props.location.pathname} >
     Admin (version de dev)
+    <SessionList>
+      <SessionsTitle>
+        <Capteur>Capteur</Capteur>
+        <StartDate>Date de début</StartDate>
+        <EndDate>Date de fin</EndDate>
+        <Actions><i className="fa fa-wrench" /></Actions>
+      </SessionsTitle>
+      {props.filteredSession.map((session, index) => <SessionItem key={index} {...session} isAdmin />)}
+    </SessionList>
     <p>Pour ajouter des entités, users, parking, stations, capteurs ou encore vélos, vous devez utiliser Postman avec le token suivant en header 'x-auth' : </p>
     <p style={{ wordBreak: 'break-all'}}>{props.token}</p>
     <h3>Entités</h3>
@@ -68,6 +116,7 @@ const AdminPage = (props) => (
 
 const mapStateToProps = state => ({
   token: state.user.authToken,
+  filteredSession: filterSession(state.sessions.deletedSession, {sorting: {value: 'startDate', order: -1}}),
 })
 
 export default connect(mapStateToProps)(AdminPage);

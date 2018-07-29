@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import CloseSessionIcon from './CloseSessionIcon';
 
-import { dispatchDelSession } from '../actions/sessions';
+import { dispatchDelSession, reactiveDeletedSession } from '../actions/sessions';
 
 import theme from '../styles/theme';
 
@@ -42,18 +42,31 @@ const DeleteIcon = styled.i`
   cursor: pointer;
 `;
 
-const SessionItem = (props) => (
-  <SessionsWrapper>
-    <Capteur>{props.identifier}</Capteur>
-    <StartDate>{moment.unix(props.startDate).locale('fr').format('L LT')}</StartDate>
-    <EndDate>{props.endDate ? (props.endDate.toString() === '-999' ? 'Non clôturée' : moment.unix(props.endDate).locale('fr').format('L LT')) : '-'}</EndDate>
-    {props.isAdmin ? 
-      <Actions>
-        <CloseSessionIcon {...props}/>
-        <DeleteIcon onClick={() => props.dispatchDelSession(props._id)} className="fa fa-trash-alt" />
-      </Actions>
-    : undefined}
-  </SessionsWrapper>
-)
+const SessionItem = (props) => {
+  if (props.isAdmin) {
+    return (
+      <SessionsWrapper>
+        <Capteur>{props.identifier}</Capteur>
+        <StartDate>{moment.unix(props.startDate).locale('fr').format('L LT')}</StartDate>
+        <EndDate>{props.endDate ? (props.endDate.toString() === '-999' ? 'Non clôturée' : moment.unix(props.endDate).locale('fr').format('L LT')) : '-'}</EndDate>
+        {props.active ?
+          <Actions>
+            <CloseSessionIcon {...props} />
+            <DeleteIcon onClick={() => props.dispatchDelSession(props._id)} className="fa fa-trash-alt" />
+          </Actions>
+          : <Actions>
+            <DeleteIcon onClick={() => props.reactiveDeletedSession(props._id)} className="fa fa-undo-alt" />
+          </Actions>}
+      </SessionsWrapper>
+    );
+  }
+  return (
+    <SessionsWrapper>
+      <Capteur>{props.identifier}</Capteur>
+      <StartDate>{moment.unix(props.startDate).locale('fr').format('L LT')}</StartDate>
+      <EndDate>{props.endDate ? (props.endDate.toString() === '-999' ? 'Non clôturée' : moment.unix(props.endDate).locale('fr').format('L LT')) : '-'}</EndDate>
+    </SessionsWrapper>
+  );
+}
 
-export default connect(null, { dispatchDelSession })(SessionItem);
+export default connect(null, { dispatchDelSession, reactiveDeletedSession })(SessionItem);

@@ -12,7 +12,7 @@ const SensorWrapper = styled.div`
   position: relative;
 `;
 
-const Badge = styled.p`
+const Badge = styled.div`
   align-items: center;
   background: red;
   border-radius: 20px;
