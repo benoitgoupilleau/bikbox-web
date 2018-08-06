@@ -5,3 +5,4 @@ public/dist/
 src/tests
 .vscode
 .env
+yarn.lock
