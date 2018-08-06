@@ -6,3 +6,4 @@ src/tests
 .vscode
 .env
 yarn.lock
+yarn-error.log
