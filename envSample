@@ -1,0 +1,5 @@
+API_URL=http://localhost:3002
+X_KEY=dfserzfezfzefze
+SENTRY_DSN=https://@sentry.io/
+PERSIST_KEY=hello
+BUNDLE_ANALYSIS=false

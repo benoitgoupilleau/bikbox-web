@@ -5,35 +5,34 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-const bundleAnalysis = false;
 
 if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
   require('dotenv').config({ path: '.env' });
 }
+
+const bundleAnalysis = process.env.BUNDLE_ANALYSIS === 'true';
 
 module.exports = (env) => {
   const isProduction = env === 'production';
   const optimization = {
     splitChunks: {
       chunks: 'all',
+      minSize: 50000,
+      maxSize: 250000,
       cacheGroups: {
-        commons: {
+        vendors: {
           test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
           priority: -10
         },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
-        }
       }
     }
   }
   const plugins = [
-    new HtmlWebpackPlugin({
-      template: 'index.ejs', filename: path.join(__dirname, 'public', 'index.html') }),
+    new HtmlWebpackPlugin({ template: 'index.ejs', filename: path.join(__dirname, 'public', 'index.html') }),
     new webpack.DefinePlugin({
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.X_KEY': JSON.stringify(process.env.X_KEY),
@@ -42,7 +41,6 @@ module.exports = (env) => {
     }),
     new MiniCssExtractPlugin({
       filename: 'styles.css',
-      chunkFilename: '[name].css'
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ];

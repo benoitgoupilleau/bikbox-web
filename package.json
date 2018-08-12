@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node server/server.js",
-    "dev": "yarn run build:dev && source .env.dev && node server/server.js",
+    "dev": "source .env.dev && node server/server.js",
     "build:dev": "webpack --mode=development --devtool=inline-source-map",
     "build:prod": "webpack -p --env production --mode=production --devtool=source-map",
     "dev-server": "webpack-dev-server --mode=development --devtool=inline-source-maps",
@@ -22,6 +22,7 @@
     "babel-cli": "6.26.0",
     "babel-core": "6.26.3",
     "babel-loader": "7.1.5",
+    "babel-plugin-syntax-dynamic-import": "6.18.0",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-polyfill": "6.26.0",

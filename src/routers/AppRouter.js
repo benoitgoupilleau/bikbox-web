@@ -60,3 +60,13 @@ const AppRouter = () => (
 );
 
 export default AppRouter;
+// const AlertPage = () => import(/* webpackPrefetch: true, webpackChunkName: "alert-page"  */ '../components/AlertPage');
+// const NotFoundPage = () => import(/* webpackPrefetch: -10, webpackChunkName: "notfound-page"  */   '../components/NotFoundPage');
+// const ResetPasswordPage = () => import(/* webpackPrefetch: true, webpackChunkName: "reset-page"  */ '../components/ResetPasswordPage');
+
+// <PublicRoute path="/" component={() => <AsyncComponent moduleProvider={LoginPage} />} exact />
+//   <PrivateRoute path="/dashboard" component={() => <AsyncComponent moduleProvider={DashboardPage} />} />
+//   <AdminRoute path="/admin" component={() => <AsyncComponent moduleProvider={AdminPage} />} />
+//   <AdminRoute path="/alerts" component={() => <AsyncComponent moduleProvider={AlertPage} />} />
+//   <PublicRoute path="/resetpassword/:token" component={() => <AsyncComponent moduleProvider={ResetPasswordPage} />} />
+//   <Route component={() => <AsyncComponent moduleProvider={NotFoundPage} />} />
