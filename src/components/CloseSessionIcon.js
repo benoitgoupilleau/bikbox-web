@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
-import moment from 'moment';
+import moment from '../helpers/moment';
 
 import Button from './ui/Button';
 
@@ -108,7 +108,7 @@ class CloseSessionIcon extends React.Component {
           style={modalStyles}
         >
           <ModalTitle>Sélectionner une date de fin</ModalTitle>
-          <Session>{`Session ${this.props.identifier}, début : ${moment.unix(this.props.startDate).locale('fr').format('L LT')}`}</Session>
+          <Session>{`Session ${this.props.identifier}, début : ${moment.unix(this.props.startDate).format('L LT')}`}</Session>
           <CloseIcon className="fa fa-times" onClick={this.handleCloseModal}/>
           <DatePicker
             dateFormat="LLL"

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
+import moment from '../helpers/moment';
 
 import theme from '../styles/theme';
 
@@ -42,7 +42,7 @@ const AlertItem = (props) => (
     <AlertType>{props.alertType}</AlertType>
     <AlertStatus>{props.status}</AlertStatus>
     <AlertIdentifier>{props.identifier}</AlertIdentifier>
-    <AlertLastUpdate>{props.lastUpdatedDate ? moment.unix(props.lastUpdatedDate).locale('fr').format('L LT') : moment.unix(props.createdAt).locale('fr').format('L LT')}</AlertLastUpdate>
+    <AlertLastUpdate>{props.lastUpdatedDate ? moment.unix(props.lastUpdatedDate).format('L LT') : moment.unix(props.createdAt).format('L LT')}</AlertLastUpdate>
   </AlertWrapper>
 )
 

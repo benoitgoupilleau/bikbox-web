@@ -1,8 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const bundleAnalysis = false;
 
 if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
   require('dotenv').config({ path: '.env' });
@@ -10,23 +15,56 @@ if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
 
 module.exports = (env) => {
   const isProduction = env === 'production';
+  const optimization = {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
   const plugins = [
+    new HtmlWebpackPlugin({
+      template: 'index.ejs', filename: path.join(__dirname, 'public', 'index.html') }),
     new webpack.DefinePlugin({
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.X_KEY': JSON.stringify(process.env.X_KEY),
       'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
       'process.env.PERSIST_KEY': JSON.stringify(process.env.PERSIST_KEY)
-    })
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css',
+      chunkFilename: '[name].css'
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ];
+  if (bundleAnalysis) plugins.push(new BundleAnalyzerPlugin())
   if (isProduction) {
-    plugins.push(new UglifyJSPlugin({ sourceMap: true }));
+    optimization.minimizer = [
+      new UglifyJSPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
   }
   return {
     entry: ['babel-polyfill', './src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
-      filename: 'bundle.js'
+      filename: 'bundle.js',
+      chunkFilename: '[name].js'
     },
+    optimization,
     module: {
       rules: [{
         loader: 'babel-loader',
@@ -34,7 +72,7 @@ module.exports = (env) => {
         exclude: /node_modules/
       },{
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+          use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader']
       }]
     }, 
     plugins: plugins,

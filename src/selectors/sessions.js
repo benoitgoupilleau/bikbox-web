@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 export const sessionPerParking = (parkings, sessions) => {
   const sessionPerParkingData = []
   for (let i = 0; i < parkings.length; i += 1) {

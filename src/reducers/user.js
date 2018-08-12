@@ -1,5 +1,5 @@
-import moment from 'moment';
 import { REHYDRATE } from 'redux-persist';
+import moment from '../helpers/moment';
 import {
   LOGIN,
   LOGIN_FAIL,

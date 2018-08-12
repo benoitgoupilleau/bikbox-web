@@ -1,6 +1,7 @@
 node_modules/
 src/playground/
 public/dist/
+public/index.html
 .env.*
 src/tests
 .vscode

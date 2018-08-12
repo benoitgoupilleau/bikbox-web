@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 import { connect } from 'react-redux';
+import moment from '../helpers/moment';
 
 import CloseSessionIcon from './CloseSessionIcon';
 
@@ -47,8 +47,8 @@ const SessionItem = (props) => {
     return (
       <SessionsWrapper>
         <Capteur>{props.identifier}</Capteur>
-        <StartDate>{moment.unix(props.startDate).locale('fr').format('L LT')}</StartDate>
-        <EndDate>{props.endDate ? (props.endDate.toString() === '-999' ? 'Non clôturée' : moment.unix(props.endDate).locale('fr').format('L LT')) : '-'}</EndDate>
+        <StartDate>{moment.unix(props.startDate).format('L LT')}</StartDate>
+        <EndDate>{props.endDate ? (props.endDate.toString() === '-999' ? 'Non clôturée' : moment.unix(props.endDate).format('L LT')) : '-'}</EndDate>
         {props.active ?
           <Actions>
             <CloseSessionIcon {...props} />
@@ -64,7 +64,7 @@ const SessionItem = (props) => {
     <SessionsWrapper>
       <Capteur>{props.identifier}</Capteur>
       <StartDate>{moment.unix(props.startDate).locale('fr').format('L LT')}</StartDate>
-      <EndDate>{props.endDate ? (props.endDate.toString() === '-999' ? 'Non clôturée' : moment.unix(props.endDate).locale('fr').format('L LT')) : '-'}</EndDate>
+      <EndDate>{props.endDate ? (props.endDate.toString() === '-999' ? 'Non clôturée' : moment.unix(props.endDate).format('L LT')) : '-'}</EndDate>
     </SessionsWrapper>
   );
 }
