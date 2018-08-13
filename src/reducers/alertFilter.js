@@ -1,6 +1,6 @@
 const defaultAlertFilter = {
   sorting: {
-    value: 'startDate',
+    value: 'createdAt',
     order: -1
   },
 }
