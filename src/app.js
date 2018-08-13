@@ -12,7 +12,7 @@ Modal.setAppElement('#app')
 const jsx = (
   <Provider store={store} >
     <PersistGate loading={null} persistor={persistor}>
-      <AppRouter />
+        <AppRouter />
     </PersistGate>
   </Provider>
 );

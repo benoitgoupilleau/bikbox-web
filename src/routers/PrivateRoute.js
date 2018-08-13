@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import Header from '../components/ui/Header';
+import ErrorBoundary from '../components/ErrorBoundary'
 
 export const PrivateRoute = ({
   isAuthenticated,
@@ -12,10 +13,10 @@ export const PrivateRoute = ({
     {...rest}
     component={(props) => (
       isAuthenticated ? (
-        <div>
+        <ErrorBoundary>
           <Header {...props} />
           <Component {...props} />
-        </div>
+        </ErrorBoundary>
         ) : <Redirect to="/" />
     )}
   />
