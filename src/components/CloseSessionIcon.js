@@ -66,7 +66,7 @@ const StyledButton = styled(Button)`
 `;
 
 
-class CloseSessionIcon extends React.Component {
+class CloseSessionIcon extends React.PureComponent {
   constructor(props) {
     const now = (props.endDate && props.endDate.toString() !== '-999') ? moment.unix(props.endDate) : moment();
     const remainder = 30 - (now.minute() % 30);

@@ -66,7 +66,7 @@ const Actions = styled.p`
   width: 5%;
 `;
 
-class DashboardPage extends React.Component {
+class DashboardPage extends React.PureComponent {
   componentDidMount() {
     if (!this.props.userDataLoaded) {
       this.props.getSessionPlace();

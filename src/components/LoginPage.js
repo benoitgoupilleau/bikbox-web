@@ -33,7 +33,7 @@ const LoaderImg = styled.img`
   width: 3rem;
 `;
 
-class LoginPage extends React.Component {
+class LoginPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

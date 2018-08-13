@@ -45,7 +45,7 @@ const AlertLastUpdate = styled.p`
   width: 30%;
 `;
 
-class AlertPage extends React.Component{
+class AlertPage extends React.PureComponent {
   componentDidMount() {
     if (!this.props.adminDataLoaded) {
       this.props.getAlert();

@@ -41,7 +41,7 @@ const Warning = styled.p`
   margin-top: 0;
 `;
 
-export class ResetPasswordPage extends React.Component {
+export class ResetPasswordPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
