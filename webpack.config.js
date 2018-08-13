@@ -35,13 +35,13 @@ module.exports = (env) => {
     plugins.push(new HtmlWebpackPlugin({ template: 'index.ejs', filename: path.join(__dirname, 'public', 'index.html')}))
     optimization.splitChunks = {
       chunks: 'all',
-        minSize: 50000,
-          maxSize: 250000,
-            cacheGroups: {
+      minSize: 50000,
+      maxSize: 250000,
+      cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-              priority: -10
+          name: "vendors",
+          priority: -10
         },
       }
     };
