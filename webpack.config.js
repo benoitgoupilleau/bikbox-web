@@ -19,8 +19,6 @@ module.exports = (env) => {
   const isProduction = env === 'production';
   const optimization = {};
   const plugins = [
-    new HtmlWebpackPlugin({ template: 'index.ejs', filename: path.join(__dirname, 'public', 'index.html'), alwaysWriteToDisk: true }),
-    new HtmlWebpackHarddiskPlugin(),
     new webpack.DefinePlugin({
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.X_KEY': JSON.stringify(process.env.X_KEY),
@@ -34,6 +32,7 @@ module.exports = (env) => {
   ];
   if (bundleAnalysis) plugins.push(new BundleAnalyzerPlugin())
   if (isProduction) {
+    plugins.push(new HtmlWebpackPlugin({ template: 'index.ejs', filename: path.join(__dirname, 'public', 'index.html')}))
     optimization.splitChunks = {
       chunks: 'all',
         minSize: 50000,
@@ -54,6 +53,8 @@ module.exports = (env) => {
       }),
       new OptimizeCSSAssetsPlugin({})
     ]
+  } else {
+    plugins.push(new HtmlWebpackPlugin({ template: 'index.ejs', filename: path.join(__dirname, 'public', 'index.html'), alwaysWriteToDisk: true }), new HtmlWebpackHarddiskPlugin())
   }
   return {
     entry: ['babel-polyfill', './src/app.js'],
