@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -17,22 +17,10 @@ const bundleAnalysis = process.env.BUNDLE_ANALYSIS === 'true';
 
 module.exports = (env) => {
   const isProduction = env === 'production';
-  const optimization = {
-    splitChunks: {
-      chunks: 'all',
-      minSize: 50000,
-      maxSize: 250000,
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          priority: -10
-        },
-      }
-    }
-  }
+  const optimization = {};
   const plugins = [
-    new HtmlWebpackPlugin({ template: 'index.ejs', filename: path.join(__dirname, 'public', 'index.html') }),
+    new HtmlWebpackPlugin({ template: 'index.ejs', filename: path.join(__dirname, 'public', 'index.html'), alwaysWriteToDisk: true }),
+    new HtmlWebpackHarddiskPlugin(),
     new webpack.DefinePlugin({
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.X_KEY': JSON.stringify(process.env.X_KEY),
@@ -46,6 +34,18 @@ module.exports = (env) => {
   ];
   if (bundleAnalysis) plugins.push(new BundleAnalyzerPlugin())
   if (isProduction) {
+    optimization.splitChunks = {
+      chunks: 'all',
+        minSize: 50000,
+          maxSize: 250000,
+            cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+              priority: -10
+        },
+      }
+    };
     optimization.minimizer = [
       new UglifyJSPlugin({
         cache: true,
