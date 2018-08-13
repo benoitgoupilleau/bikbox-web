@@ -11,6 +11,7 @@ import parkingsReducer from '../reducers/parkings';
 import alertsReducer from '../reducers/alerts';
 import sensorsReducer from '../reducers/sensors';
 import sessionFilterReducer from '../reducers/sessionFilter';
+import alertFilterReducer from '../reducers/alertFilter';
 
 const composeEnhancers = process.env.NODE_ENV === 'production' ? compose : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   sessionFilter: sessionFilterReducer,
   parkings: parkingsReducer,
   alerts: alertsReducer,
+  alertFilter: alertFilterReducer,
   sensors: sensorsReducer
 });
 

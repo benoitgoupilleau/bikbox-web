@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Main from './ui/Main';
 import AlertItem from './AlertItem';
 import { getAlert } from '../actions/alerts';
+import { filterAlert } from '../selectors/alerts'
 
 import theme from '../styles/theme';
 
@@ -72,7 +73,7 @@ class AlertPage extends React.Component{
 
 const mapStateToProps = state => ({
   adminDataLoaded: state.alerts.alertsLoaded,
-  alerts: state.alerts.alerts
+  alerts: filterAlert(state.alerts.alerts, state.alertFilter)
 })
 
 export default connect(mapStateToProps, { getAlert })(AlertPage);
