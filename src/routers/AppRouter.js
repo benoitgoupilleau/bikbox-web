@@ -2,15 +2,20 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { injectGlobal } from 'styled-components';
 import createHistory from 'history/createBrowserHistory';
-import LoginPage from '../components/LoginPage';
-import DashboardPage from '../components/DashboardPage';
-import AdminPage from '../components/AdminPage';
-import AlertPage from '../components/AlertPage';
-import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
+
+import asyncComponent from '../helpers/asyncComponent';
+
+import LoginPage from '../components/LoginPage';
+import DashboardPage from '../components/DashboardPage';
+// import AdminPage from '../components/AdminPage';
+import AlertPage from '../components/AlertPage';
+import NotFoundPage from '../components/NotFoundPage';
 import ResetPasswordPage from '../components/ResetPasswordPage';
+
+const AdminPage = asyncComponent(() => import(/* webpackChunkName: 'adminpage' */'../components/AdminPage'))
 
 import theme from '../styles/theme';
 
@@ -60,13 +65,3 @@ const AppRouter = () => (
 );
 
 export default AppRouter;
-// const AlertPage = () => import(/* webpackPrefetch: true, webpackChunkName: "alert-page"  */ '../components/AlertPage');
-// const NotFoundPage = () => import(/* webpackPrefetch: -10, webpackChunkName: "notfound-page"  */   '../components/NotFoundPage');
-// const ResetPasswordPage = () => import(/* webpackPrefetch: true, webpackChunkName: "reset-page"  */ '../components/ResetPasswordPage');
-
-// <PublicRoute path="/" component={() => <AsyncComponent moduleProvider={LoginPage} />} exact />
-//   <PrivateRoute path="/dashboard" component={() => <AsyncComponent moduleProvider={DashboardPage} />} />
-//   <AdminRoute path="/admin" component={() => <AsyncComponent moduleProvider={AdminPage} />} />
-//   <AdminRoute path="/alerts" component={() => <AsyncComponent moduleProvider={AlertPage} />} />
-//   <PublicRoute path="/resetpassword/:token" component={() => <AsyncComponent moduleProvider={ResetPasswordPage} />} />
-//   <Route component={() => <AsyncComponent moduleProvider={NotFoundPage} />} />

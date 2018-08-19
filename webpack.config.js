@@ -33,23 +33,35 @@ module.exports = (env) => {
   if (bundleAnalysis) plugins.push(new BundleAnalyzerPlugin())
   if (isProduction) {
     plugins.push(new HtmlWebpackPlugin({ template: 'index.ejs', filename: path.join(__dirname, 'public', 'index.html')}))
+    optimization.runtimeChunk = true;
     optimization.splitChunks = {
       chunks: 'all',
       minSize: 50000,
-      maxSize: 250000,
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          priority: -10
-        },
-      }
+      maxSize: 300000
     };
     optimization.minimizer = [
       new UglifyJSPlugin({
+        uglifyOptions: {
+          parse: {
+            ecma: 8,
+          },
+          compress: {
+            ecma: 5,
+            warnings: false,
+            comparisons: false,
+          },
+          mangle: {
+            safari10: true,
+          },
+          output: {
+            ecma: 5,
+            comments: false,
+            ascii_only: true,
+          },
+        },
         cache: true,
         parallel: true,
-        sourceMap: true // set to true if you want JS source maps
+        sourceMap: true
       }),
       new OptimizeCSSAssetsPlugin({})
     ]
@@ -60,6 +72,7 @@ module.exports = (env) => {
     entry: ['babel-polyfill', './src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
+      publicPath: '/dist/',
       filename: 'bundle.js',
       chunkFilename: '[name].js'
     },
@@ -78,7 +91,6 @@ module.exports = (env) => {
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
-      historyApiFallback: true,
       publicPath: '/dist/',
       port: 3000
     }
