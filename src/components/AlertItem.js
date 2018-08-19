@@ -42,6 +42,10 @@ const Actions = styled.p`
   width: 5%;
 `;
 
+const CloseAlert = styled.i`
+  cursor: pointer;
+`;
+
 const AlertItem = (props) => (
   <AlertWrapper status={props.status}>
     <AlertName>{props.name}</AlertName>
@@ -50,7 +54,7 @@ const AlertItem = (props) => (
     <AlertIdentifier>{props.identifier}</AlertIdentifier>
     <AlertLastUpdate>{props.lastUpdatedDate ? moment.unix(props.lastUpdatedDate).format('L LT') : moment.unix(props.createdAt).format('L LT')}</AlertLastUpdate>
     <Actions>
-      <i onClick={() => props.closeAlert(props._id)} className="fa fa-times" />
+      <CloseAlert onClick={() => props.closeAlert(props._id)} className="fa fa-times" />
     </Actions>
   </AlertWrapper>
 )

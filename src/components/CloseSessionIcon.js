@@ -14,6 +14,7 @@ import theme from '../styles/theme';
 ReactModal.setAppElement('#app')
 
 const Icon = styled.i`
+  cursor: pointer;
   padding-right: 5px;
 `;
 
