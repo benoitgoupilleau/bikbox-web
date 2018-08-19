@@ -30,13 +30,9 @@ export const logout = () => ({
   type: LOGOUT
 });
 
-export const errorLogout = () => ({
-  type: LOGIN_FAIL
-});
-
 export const startLogout = () => dispatch => axios({ method: 'DELETE', url:'/adminusers/token', headers: { 'x-auth': store.getState().user.authToken } })
   .then(() => dispatch(logout()))
-  .catch(() => dispatch(errorLogout()))
+  .catch(() => dispatch(logout()))
 
 
 export const toggleNavBar = () => ({

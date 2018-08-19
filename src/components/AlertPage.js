@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Main from './ui/Main';
 import AlertItem from './AlertItem';
-import { getAlert, closeAlert } from '../actions/alerts';
+import { getAlert, closeAlert, readAlert } from '../actions/alerts';
 import { filterAlert } from '../selectors/alerts'
 
 import theme from '../styles/theme';
@@ -69,7 +69,7 @@ class AlertPage extends React.PureComponent {
             <AlertLastUpdate>Dernière mise à jour</AlertLastUpdate>
             <Actions></Actions>
           </AlertsTitle>
-          {this.props.alerts.map((alert, index) => <AlertItem key={index} {...alert} closeAlert={this.props.closeAlert}/>)}
+          {this.props.alerts.map((alert, index) => <AlertItem key={index} {...alert} closeAlert={this.props.closeAlert} readAlert={this.props.readAlert}/>)}
         </AlertsList>
       </Main>
     );
@@ -81,4 +81,4 @@ const mapStateToProps = state => ({
   alerts: filterAlert(state.alerts.alerts, state.alertFilter)
 })
 
-export default connect(mapStateToProps, { getAlert, closeAlert })(AlertPage);
+export default connect(mapStateToProps, { getAlert, closeAlert, readAlert })(AlertPage);

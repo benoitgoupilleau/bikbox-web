@@ -2,6 +2,7 @@ import axios from '../helpers/axios';
 import {
   SET_ALERT,
   SET_ALERT_FAIL,
+  READ_ALERT,
   CLOSE_ALERT,
   CLOSE_ALERT_FAILED
 } from './types';
@@ -36,3 +37,12 @@ export const closeAlert = (id) => dispatch =>
   axios({ method: 'PATCH', url: `/alert/${id}`, headers: { 'x-auth': store.getState().user.authToken }, data: { status: 'closed' } })
     .then(() => dispatch(alertClosed(id)))
     .catch(() => dispatch(alertClosedFailed()))
+
+const alertRead = (id) => ({
+  type: READ_ALERT,
+  id
+})
+
+export const readAlert = (id) => dispatch =>
+  axios({ method: 'PATCH', url: `/alert/${id}`, headers: { 'x-auth': store.getState().user.authToken }, data: { status: 'read' } })
+    .then(() => dispatch(alertRead(id)))

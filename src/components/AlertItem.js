@@ -6,6 +6,7 @@ import theme from '../styles/theme';
 import trad from '../text/traductions';
 
 const AlertWrapper = styled.div`
+  cursor: pointer;
   display: flex;
   font-size: ${props => props.status === 'closed' ? theme.fonts.tiny : theme.fonts.small};
   ${props => props.status === 'closed' && 'font-style: italic;'};
@@ -47,7 +48,7 @@ const CloseAlert = styled.i`
 `;
 
 const AlertItem = (props) => (
-  <AlertWrapper status={props.status}>
+  <AlertWrapper status={props.status} onClick={() => props.readAlert(props._id)}>
     <AlertName>{props.name}</AlertName>
     <AlertType>{props.alertType}</AlertType>
     <AlertStatus>{trad.alertStatus[props.status]}</AlertStatus>
