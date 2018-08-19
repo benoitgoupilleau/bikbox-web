@@ -1,6 +1,8 @@
 import {
   SET_ALERT,
   SET_ALERT_FAIL,
+  CLOSE_ALERT,
+  CLOSE_ALERT_FAILED,
   LOGOUT
 } from '../actions/types';
 
@@ -24,8 +26,17 @@ export default (state = defaultAlertsState, action) => {
         alertsLoaded: false,
         errorLoading: true
       }
+    case CLOSE_ALERT: {
+      const currentAlerts = [ ...state.alerts ];
+      const indexToUpdate = currentAlerts.findIndex(alert => alert._id === action.id);
+      const updatedAlert = { ...currentAlerts[indexToUpdate], status: 'closed' };
+      return {
+        ...state,
+        alerts: [...currentAlerts.slice(0, indexToUpdate), updatedAlert, ...currentAlerts.slice(indexToUpdate+1)]
+      }
+    }
     case LOGOUT:
-      return defaultAlertsState
+      return {...defaultAlertsState}
     default:
       return state;
   }

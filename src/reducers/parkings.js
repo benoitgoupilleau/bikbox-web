@@ -25,7 +25,7 @@ export default (state = defaultParkingsState, action) => {
         errorLoading: true
       }
     case LOGOUT:
-      return defaultParkingsState
+      return {...defaultParkingsState}
     default:
       return state;
   }

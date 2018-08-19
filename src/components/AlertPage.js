@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Main from './ui/Main';
 import AlertItem from './AlertItem';
-import { getAlert } from '../actions/alerts';
+import { getAlert, closeAlert } from '../actions/alerts';
 import { filterAlert } from '../selectors/alerts'
 
 import theme from '../styles/theme';
@@ -26,7 +26,7 @@ const AlertsTitle = styled.div`
 `;
 
 const AlertName = styled.p`
-  width: 30%;
+  width: 25%;
 `;
 
 const AlertType = styled.p`
@@ -43,6 +43,10 @@ const AlertIdentifier = styled.p`
 
 const AlertLastUpdate = styled.p`
   width: 30%;
+`;
+
+const Actions = styled.p`
+  width: 5%;
 `;
 
 class AlertPage extends React.PureComponent {
@@ -63,8 +67,9 @@ class AlertPage extends React.PureComponent {
             <AlertStatus>Statut</AlertStatus>
             <AlertIdentifier>Capteur/Station</AlertIdentifier>
             <AlertLastUpdate>Dernière mise à jour</AlertLastUpdate>
+            <Actions></Actions>
           </AlertsTitle>
-          {this.props.alerts.map((alert, index) => <AlertItem key={index} {...alert} />)}
+          {this.props.alerts.map((alert, index) => <AlertItem key={index} {...alert} closeAlert={this.props.closeAlert}/>)}
         </AlertsList>
       </Main>
     );
@@ -76,4 +81,4 @@ const mapStateToProps = state => ({
   alerts: filterAlert(state.alerts.alerts, state.alertFilter)
 })
 
-export default connect(mapStateToProps, { getAlert })(AlertPage);
+export default connect(mapStateToProps, { getAlert, closeAlert })(AlertPage);

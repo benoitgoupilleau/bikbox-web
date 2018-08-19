@@ -80,7 +80,7 @@ export default (state = defaultSessionsState, action) => {
       }
     }
     case LOGOUT:
-      return defaultSessionsState
+      return {...defaultSessionsState}
     default:
       return state;
   }

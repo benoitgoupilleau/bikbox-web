@@ -25,7 +25,7 @@ export default (state = defaultSensorsState, action) => {
         errorLoading: true
       }
     case LOGOUT:
-      return defaultSensorsState
+      return {...defaultSensorsState}
     default:
       return state;
   }
