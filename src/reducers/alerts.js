@@ -1,6 +1,7 @@
 import {
   SET_ALERT,
   SET_ALERT_FAIL,
+  READ_ALERT,
   CLOSE_ALERT,
   CLOSE_ALERT_FAILED,
   LOGOUT
@@ -30,6 +31,15 @@ export default (state = defaultAlertsState, action) => {
       const currentAlerts = [ ...state.alerts ];
       const indexToUpdate = currentAlerts.findIndex(alert => alert._id === action.id);
       const updatedAlert = { ...currentAlerts[indexToUpdate], status: 'closed' };
+      return {
+        ...state,
+        alerts: [...currentAlerts.slice(0, indexToUpdate), updatedAlert, ...currentAlerts.slice(indexToUpdate+1)]
+      }
+    }
+    case READ_ALERT: {
+      const currentAlerts = [ ...state.alerts ];
+      const indexToUpdate = currentAlerts.findIndex(alert => alert._id === action.id);
+      const updatedAlert = { ...currentAlerts[indexToUpdate], status: 'read' };
       return {
         ...state,
         alerts: [...currentAlerts.slice(0, indexToUpdate), updatedAlert, ...currentAlerts.slice(indexToUpdate+1)]
