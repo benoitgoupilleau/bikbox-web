@@ -8,8 +8,10 @@ import moment from '../helpers/moment';
 import Button from './ui/Button';
 
 import { dispatchUpdateSession } from '../actions/sessions'
+import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 
 import theme from '../styles/theme';
+ReactModal.setAppElement('#app')
 
 const Icon = styled.i`
   padding-right: 5px;

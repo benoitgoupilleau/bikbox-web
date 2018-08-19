@@ -6,16 +6,12 @@ import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
 
-import asyncComponent from '../helpers/asyncComponent';
-
 import LoginPage from '../components/LoginPage';
 import DashboardPage from '../components/DashboardPage';
-// import AdminPage from '../components/AdminPage';
+import AdminPage from '../components/AdminPage';
 import AlertPage from '../components/AlertPage';
 import NotFoundPage from '../components/NotFoundPage';
 import ResetPasswordPage from '../components/ResetPasswordPage';
-
-const AdminPage = asyncComponent(() => import(/* webpackChunkName: 'adminpage' */'../components/AdminPage'))
 
 import theme from '../styles/theme';
 

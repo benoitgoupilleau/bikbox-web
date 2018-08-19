@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import moment from '../helpers/moment';
 
-import CloseSessionIcon from './CloseSessionIcon';
+import asyncComponent from '../helpers/asyncComponent';
 
 import { dispatchDelSession, reactiveDeletedSession } from '../actions/sessions';
 
 import theme from '../styles/theme';
+
+const CloseSessionIcon = asyncComponent(() => import(/* webpackChunkName: 'closesession' */'./CloseSessionIcon')) 
 
 const SessionsWrapper = styled.div`
   display: flex;
@@ -33,8 +35,12 @@ const EndDate = styled.p`
 `;
 
 const Actions = styled.p`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 40px;
   min-width: 30px;
-  text-align: right;
   width: 5%;
 `;
 

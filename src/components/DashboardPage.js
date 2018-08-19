@@ -62,6 +62,8 @@ const EndDate = styled.p`
 `;
 
 const Actions = styled.p`
+  max-width: 40px;
+  min-width: 30px;
   text-align: right;
   width: 5%;
 `;

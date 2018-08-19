@@ -36,8 +36,8 @@ module.exports = (env) => {
     optimization.runtimeChunk = true;
     optimization.splitChunks = {
       chunks: 'all',
-      minSize: 50000,
-      maxSize: 300000
+      minSize: 200000,
+      maxSize: 500000
     };
     optimization.minimizer = [
       new UglifyJSPlugin({
@@ -73,7 +73,7 @@ module.exports = (env) => {
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       publicPath: '/dist/',
-      filename: 'bundle.js',
+      filename: '[name].js',
       chunkFilename: '[name].js'
     },
     optimization,
