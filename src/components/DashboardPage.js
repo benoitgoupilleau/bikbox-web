@@ -91,7 +91,7 @@ class DashboardPage extends React.Component {
             {this.props.sensors.map((sensor, index) => <SensorItem
               key={index} {...sensor}
               session={this.props.sessionPlace.filter(session => (session.identifier === sensor.identifier && session.endDate === null)).length > 0}
-              alert={this.props.alerts.filter(alert => (alert.identifier === sensor.identifier && alert.status !== 'closed'))}
+              alert={this.props.alerts.filter(alert => (alert.identifier === sensor.identifier && alert.status === 'opened'))}
             />)}
           </SensorContainer>
         </SensorList>
