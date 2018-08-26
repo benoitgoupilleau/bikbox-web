@@ -45,7 +45,7 @@ export default (state = defaultUserState, action) => {
         errorLogin: true
       }
     case LOGOUT:
-      return {...defaultUserStates};
+      return { ...defaultUserState};
     case UPDATE_PASSWORD:
       return {
         ...state,

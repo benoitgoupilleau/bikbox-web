@@ -70,7 +70,7 @@ class LoginPage extends React.PureComponent {
     this.props.startLogin(this.state.email, this.state.password).then((r) => {
       if (r.type === 'LOGIN_FAIL' && r.status !== 423) return this.setState({ error: 'Identifiants incorrects', loading: false })
       if (r.status === 423) return this.setState({ error: 'Compte bloqué', loading: false, blocked: true })
-      return this.setState({ loading: false })
+      
     }).catch(() => this.setState({ loading: false }));
   }
 
