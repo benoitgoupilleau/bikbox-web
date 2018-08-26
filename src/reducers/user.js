@@ -6,7 +6,8 @@ import {
   LOGOUT,
   UPDATE_PASSWORD,
   UPDATE_PASSWORD_FAIL,
-  TOGGLE_NAV
+  TOGGLE_NAV,
+  SELECT_ENTITY
 } from '../actions/types';
 
 const defaultUserState = {
@@ -15,7 +16,8 @@ const defaultUserState = {
   user: {},
   errorLogin: false,
   passwordUpdated: false,
-  isNavOpen: false
+  isNavOpen: false,
+  selectedEntity: ''
 }
 
 export default (state = defaultUserState, action) => {
@@ -37,7 +39,8 @@ export default (state = defaultUserState, action) => {
         authToken: action.authToken,
         user: action.user,
         expiresIn: action.expiresIn,
-        errorLogin: false
+        errorLogin: false,
+        selectedEntity: action.user._entity[0]._id
       };
     case LOGIN_FAIL:
       return {
@@ -60,6 +63,11 @@ export default (state = defaultUserState, action) => {
       return {
         ...state,
         isNavOpen: !state.isNavOpen
+      }
+    case SELECT_ENTITY: 
+      return {
+        ...state,
+        selectedEntity: action._id
       }
     default:
       return state;

@@ -5,7 +5,8 @@ import {
   LOGOUT,
   UPDATE_PASSWORD,
   UPDATE_PASSWORD_FAIL,
-  TOGGLE_NAV
+  TOGGLE_NAV,
+  SELECT_ENTITY
 } from './types';
 
 import { store } from '../store/store';
@@ -50,3 +51,8 @@ export const passwordNotUpdated = () => ({
 export const updatePassword = (token, password) => dispatch => axios({ method: 'POST', url: `/adminusers/resetpassword/${token}`, data: { password }, headers: { 'x-auth': store.getState().user.authToken } })
   .then(() => dispatch(passwordUpdated()))
   .catch(() => dispatch(passwordNotUpdated()))
+
+export const selectEntity = (_id) => ({
+  type: SELECT_ENTITY,
+  _id
+})

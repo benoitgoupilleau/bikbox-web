@@ -13,6 +13,7 @@ export default {
     offWhite: '#f7f7F7'
   },
   fonts: {
+    xlarge: '2.6rem',
     large: '1.8rem',
     medium: '1.6rem',
     small: '1.4rem',

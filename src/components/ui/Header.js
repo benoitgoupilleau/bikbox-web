@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { startLogout, toggleNavBar } from '../../actions/user';
+
+import { startLogout, toggleNavBar, selectEntity } from '../../actions/user';
 
 import theme from '../../styles/theme';
 
@@ -58,11 +59,45 @@ const NavToggle = styled.div`
 `;
 
 const LeftContent = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
 `;
 
-export const Header = ({ startLogout, isNavOpen, toggleNavBar }) => {
+const RightContent = styled.div`
+  align-items: center;
+  display: flex;
+`;
+
+const SelectLayout = styled.div`
+  margin: 0 ${theme.spacing.s};
+  position: relative;
+`;
+
+const SelectEntity = styled.select`
+  background: none;
+  border: none;
+  color: ${theme.colors.defaultColor};
+  font-size: ${theme.fonts.xlarge};
+  font-weight: 300;
+  min-width: 12rem;
+  outline: none;
+  padding-right: 2.5rem;
+
+   /* reset */
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+`;
+
+const Selector = styled.i`
+  color: ${theme.colors.defaultColor};
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+`;
+
+export const Header = ({ startLogout, isNavOpen, toggleNavBar, user, selectEntity, selectedEntity }) => {
   const navImageSrc = isNavOpen ? '/images/x.svg' : '/images/bars.svg';
   return (
   <StyledHeader>
@@ -81,14 +116,24 @@ export const Header = ({ startLogout, isNavOpen, toggleNavBar }) => {
             </h1>
           </HeaderTitle>
         </LeftContent>
-        <LinkButton onClick={startLogout}>Déconnexion</LinkButton>
+        <RightContent>
+          <SelectLayout>
+            <SelectEntity value={selectedEntity} onChange={(e) => selectEntity(e.target.value)}>
+              {user._entity.length > 0 ? user._entity.map(entity => <option key={entity._id} value={entity._id}>{entity.name}</option>) : <option value={user._entity[0]._id}>{user._entity[0].name}</option>}
+            </SelectEntity>
+            {user._entity.length > 0 && <Selector className="fas fa-angle-down fa-2x" />}
+          </SelectLayout>
+          <LinkButton onClick={startLogout}>Déconnexion</LinkButton>
+        </RightContent>
       </HeaderContent>
   </StyledHeader>
   );
 }
 
 const mapStateToProps = state => ({
-  isNavOpen: state.user.isNavOpen
+  isNavOpen: state.user.isNavOpen,
+  user: state.user.user,
+  selectedEntity: state.user.selectedEntity
 })
 
-export default connect(mapStateToProps, { startLogout, toggleNavBar })(Header);
+export default connect(mapStateToProps, { startLogout, toggleNavBar, selectEntity })(Header);
