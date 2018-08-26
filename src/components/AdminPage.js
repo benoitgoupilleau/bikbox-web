@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import moment from '../helpers/moment'
  
 import Main from './ui/Main';
 import SessionItem from './SessionItem';
@@ -120,7 +121,10 @@ const AdminPage = (props) => {
 
 const mapStateToProps = state => ({
   token: state.user.authToken,
-  filteredSession: filterSession(state.sessions.deletedSession, {sorting: {value: 'startDate', order: -1}}),
+  filteredSession: filterSession(state.sessions.deletedSession, { value: 'startDate', order: -1 }, {
+    text: '', 
+    startDate: moment(0).startOf('day').unix(),
+    endDate: moment().endOf('day').unix()}),
   deletedSessionLoaded: state.sessions.deletedSessionLoaded
 })
 
