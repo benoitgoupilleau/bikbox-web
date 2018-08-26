@@ -57,7 +57,8 @@ const AdminPage = (props) => {
           <EndDate>Date de fin</EndDate>
           <Actions><i className="fa fa-wrench" /></Actions>
         </SessionsTitle>
-        {props.filteredSession.map((session, index) => <SessionItem key={index} {...session} isAdmin />)}
+        {filterSession(props.sessions, { value: 'startDate', order: -1 }, { text: '', startDate: moment(0).startOf('day').unix(), endDate: moment().endOf('day').unix()})
+          .map((session, index) => <SessionItem key={index} {...session} isAdmin />)}
       </SessionList>
       <p>Pour ajouter des entités, users, parking, stations, capteurs ou encore vélos, vous devez utiliser Postman avec le token suivant en header 'x-auth' : </p>
       <p style={{ wordBreak: 'break-all'}}>{props.token}</p>
@@ -121,10 +122,7 @@ const AdminPage = (props) => {
 
 const mapStateToProps = state => ({
   token: state.user.authToken,
-  filteredSession: filterSession(state.sessions.deletedSession, { value: 'startDate', order: -1 }, {
-    text: '', 
-    startDate: moment(0).startOf('day').unix(),
-    endDate: moment().endOf('day').unix()}),
+  sessions: state.sessions.deletedSession.filter(el => el._entity === state.user.selectedEntity),
   deletedSessionLoaded: state.sessions.deletedSessionLoaded
 })
 

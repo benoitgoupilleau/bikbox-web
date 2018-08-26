@@ -69,7 +69,7 @@ class AlertPage extends React.PureComponent {
             <AlertLastUpdate>Dernière mise à jour</AlertLastUpdate>
             <Actions></Actions>
           </AlertsTitle>
-          {this.props.alerts.map((alert, index) => <AlertItem key={index} {...alert} closeAlert={this.props.closeAlert} readAlert={this.props.readAlert}/>)}
+          {filterAlert(this.props.alerts, this.props.alertFilter).map((alert, index) => <AlertItem key={index} {...alert} closeAlert={this.props.closeAlert} readAlert={this.props.readAlert}/>)}
         </AlertsList>
       </Main>
     );
@@ -78,7 +78,8 @@ class AlertPage extends React.PureComponent {
 
 const mapStateToProps = state => ({
   adminDataLoaded: state.alerts.alertsLoaded,
-  alerts: filterAlert(state.alerts.alerts, state.alertFilter)
+  alerts: state.alerts.alerts.filter(el => el._entity === state.user.selectedEntity),
+  alertFilter: state.alertFilter
 })
 
 export default connect(mapStateToProps, { getAlert, closeAlert, readAlert })(AlertPage);

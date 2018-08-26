@@ -112,18 +112,17 @@ class DashboardPage extends React.Component {
 
 const mapStateToProps =  state => ({
   userAdmin: state.user.user.userType === 'admin',
-  sessionPlace: state.sessions.sessionPlace,
+  sessionPlace: state.sessions.sessionPlace.filter(el => el._entity === state.user.selectedEntity),
   filter: state.sessionFilter.filter,
   sorting: state.sessionFilter.sorting,
   userDataLoaded: state.sessions.sessionPlaceLoaded && state.parkings.parkingsLoaded && state.sensors.sensorsLoaded,
   errorSession: state.sessions.errorLoading,
-  parkings: state.parkings.parkings,
+  parkings: state.parkings.parkings.filter(el => el._entity === state.user.selectedEntity),
   errorParking: state.parkings.errorLoading,
   adminDataLoaded: state.alerts.alertsLoaded || state.user.user.userType !== 'admin',
-  sensors: state.sensors.sensors,
-  alerts: state.alerts.alerts,
+  sensors: state.sensors.sensors.filter(el => el._entity === state.user.selectedEntity),
+  alerts: state.alerts.alerts.filter(el => el._entity === state.user.selectedEntity),
   errorSensor: state.sensors.errorLoading,
-  data: sessionPerParking(state.parkings.parkings, state.sessions.sessionPlace)
 })
 
 export default connect(mapStateToProps, {

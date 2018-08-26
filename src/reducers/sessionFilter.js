@@ -3,7 +3,9 @@ import moment from '../helpers/moment';
 import {
   UPDATE_STARTDATE,
   UPDATE_ENDDATE,
-  UPDATE_TEXT
+  UPDATE_TEXT,
+  SELECT_ENTITY,
+  LOGOUT
 } from '../actions/types';
 
 const defaultSessionFilter = {
@@ -41,6 +43,15 @@ export default (state = defaultSessionFilter, action) => {
           ...state.filter, text: action.text
         }
       }
+    case SELECT_ENTITY: 
+      return {
+        ...state,
+        filter: {
+          ...state.filter, text: ''
+        }
+      }
+    case LOGOUT:
+      return { ...defaultSessionFilter };
     default:
       return state;
   }
