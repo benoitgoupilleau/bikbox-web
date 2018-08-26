@@ -13,7 +13,7 @@ const defaultSessionFilter = {
   },
   filter: {
     text: '',
-    startDate: moment().startOf('day').subtract(2, 'months').unix(),
+    startDate: moment().startOf('day').subtract(1, 'months').unix(),
     endDate: moment().endOf('day').unix()
   }
 }
