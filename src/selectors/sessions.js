@@ -1,3 +1,5 @@
+import moment from '../helpers/moment'
+
 export const sessionPerParking = (parkings, sessions) => {
   const sessionPerParkingData = []
   for (let i = 0; i < parkings.length; i += 1) {
@@ -10,6 +12,9 @@ export const sessionPerParking = (parkings, sessions) => {
   return sessionPerParkingData
 }
 
-export const filterSession = (sessions, filter) => {
-  return sessions.sort((a, b) => a[filter.sorting.value] > b[filter.sorting.value] ? filter.sorting.order : -filter.sorting.order)
+export const filterSession = (sessions, sorting, filter) => {
+  return sessions
+    .filter((session) => session.identifier.includes(filter.text))
+    .filter((session) => session.startDate >= filter.startDate)
+    .sort((a, b) => a[sorting.value] > b[sorting.value] ? sorting.order : -sorting.order)
 }

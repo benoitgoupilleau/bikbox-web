@@ -15,26 +15,23 @@ const SessionsWrapper = styled.div`
   display: flex;
   font-size: ${theme.fonts.small};
   font-weight: 300;
+  padding: ${theme.spacing.xs} 0;
   width: 100%;
-
-  p {
-    margin: ${theme.spacing.xs} 0;
-  }
 `;
 
-const Capteur = styled.p`
+const Capteur = styled.div`
   width: 40%;
 `;
 
-const StartDate = styled.p`
+const StartDate = styled.div`
   width: 30%;
 `;
 
-const EndDate = styled.p`
+const EndDate = styled.div`
   width: 25%;
 `;
 
-const Actions = styled.p`
+const Actions = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;

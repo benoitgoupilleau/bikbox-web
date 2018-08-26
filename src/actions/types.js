@@ -15,6 +15,11 @@ export const DELETE_SESSION = 'DELETE_SESSION';
 export const UPDATE_SESSION = 'UPDATE_SESSION';
 export const UPDATE_SESSION_FAIL = 'UPDATE_SESSION_FAIL';
 
+// Session filter
+export const UPDATE_STARTDATE = 'UPDATE_STARTDATE'
+export const UPDATE_ENDDATE = 'UPDATE_ENDDATE'
+export const UPDATE_TEXT = 'UPDATE_TEXT'
+
 // Filter session action
 
 // Parking action

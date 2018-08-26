@@ -6,6 +6,7 @@ import Main from './ui/Main';
 
 import SessionItem from './SessionItem';
 import SensorItem from './SensorItem';
+import SessionFilter from './SessionFilter';
 
 import { getSessionPlace, getDeletedSession } from '../actions/sessions';
 import { getParking } from '../actions/parkings';
@@ -13,6 +14,8 @@ import { getAlert } from '../actions/alerts';
 import { getSensor } from '../actions/sensors';
 import { sessionPerParking, filterSession } from '../selectors/sessions';
 import theme from '../styles/theme';
+
+import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 
 const SensorList = styled.div`
   background: white;
@@ -42,33 +45,30 @@ const SessionList = styled.div`
 const SessionsTitle = styled.div`
   border-bottom: 1px solid ${theme.colors.brandTertiary};
   display: flex;
+  padding: ${theme.spacing.xs} 0;
   width: 100%;
-
-  p {
-    margin: ${theme.spacing.s} 0;
-  }
 `;
 
-const Capteur = styled.p`
+const Capteur = styled.div`
   width: 40%;
 `;
 
-const StartDate = styled.p`
+const StartDate = styled.div`
   width: 30%;
 `;
 
-const EndDate = styled.p`
+const EndDate = styled.div`
   width: 25%;
 `;
 
-const Actions = styled.p`
+const Actions = styled.div`
   max-width: 40px;
   min-width: 30px;
   text-align: right;
   width: 5%;
 `;
 
-class DashboardPage extends React.PureComponent {
+class DashboardPage extends React.Component {
   componentDidMount() {
     if (!this.props.userDataLoaded) {
       this.props.getSessionPlace();
@@ -95,14 +95,15 @@ class DashboardPage extends React.PureComponent {
             />)}
           </SensorContainer>
         </SensorList>
-        <SessionList>
+				<SessionList>
+					<SessionFilter />
           <SessionsTitle>
             <Capteur>Capteur</Capteur>
             <StartDate>Date de début</StartDate>
             <EndDate>Date de fin</EndDate>
             {this.props.userAdmin ? <Actions><i className="fa fa-wrench"/></Actions> : undefined}
           </SessionsTitle>
-          {this.props.filteredSession.map((session, index) => <SessionItem key={index} {...session} isAdmin={this.props.userAdmin} />)}
+          {filterSession(this.props.sessionPlace, this.props.sorting, this.props.filter).map((session, index) => <SessionItem key={index} {...session} isAdmin={this.props.userAdmin} />)}
         </SessionList>
       </Main>
     );
@@ -112,7 +113,8 @@ class DashboardPage extends React.PureComponent {
 const mapStateToProps =  state => ({
   userAdmin: state.user.user.userType === 'admin',
   sessionPlace: state.sessions.sessionPlace,
-  filteredSession: filterSession(state.sessions.sessionPlace, state.sessionFilter),
+  filter: state.sessionFilter.filter,
+  sorting: state.sessionFilter.sorting,
   userDataLoaded: state.sessions.sessionPlaceLoaded && state.parkings.parkingsLoaded && state.sensors.sensorsLoaded,
   errorSession: state.sessions.errorLoading,
   parkings: state.parkings.parkings,
